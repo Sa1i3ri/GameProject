@@ -23,8 +23,11 @@ public class Player : MonoBehaviour
     void Update()
     {
         MoveControl();
+    }
+
+    private void FixedUpdate()
+    {
         Move();
-        Stable();
     }
 
     private void MoveControl()
@@ -75,10 +78,26 @@ public class Player : MonoBehaviour
     {
         if (collision.collider.tag == "Wall"||collision.collider.tag=="Enemy")
         {
-            up = false;
-            down = false;
-            left = false;
-            right = false;
+            if (up == true)
+            {
+                this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 0.1f, 0);
+                up = false;
+            }
+            if (down == true)
+            {
+                this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.1f, 0);
+                down = false;
+            }
+            if (left == true)
+            {
+                this.transform.position = new Vector3(this.transform.position.x+0.1f, this.transform.position.y, 0);
+                left = false;
+            }
+            if (right == true)
+            {
+                this.transform.position = new Vector3(this.transform.position.x-0.1f, this.transform.position.y, 0);
+                right = false;
+            }
             isMoving = false;
         }
     }
