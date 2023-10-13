@@ -9,8 +9,12 @@ TagManager:
   - DestroyableWall
   - Hero
   - Enemy
+  - Arrow
   - SwordCard
   - BowCard
+  - Door
+  - GarbageHeap
+  - GarbageBin
   layers:
   - Default
   - TransparentFX
@@ -18,8 +22,8 @@ TagManager:
   - 
   - Water
   - UI
-  - BackGround
-  - 
+  - Player
+  - Arrow
   - 
   - 
   - 
@@ -48,9 +52,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: BackGound
-    uniqueID: 1832407419
+  - name: background
+    uniqueID: 2499998501
     locked: 0
-  - name: Tiles
-    uniqueID: 3984401523
+  - name: tilemap
+    uniqueID: 2626283173
     locked: 0

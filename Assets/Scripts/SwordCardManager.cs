@@ -90,10 +90,12 @@ public class SwordCardManager : MonoBehaviour
             GetComponent<Image>().color = new Color(255, 255, 255);
             UpgradeSwordCard.Instance.DownGradeSword();
             //TODO
+
         }
         else
         {//是普通剑
-            //TODO
+            Player.Instance.player_state = Player.Player_State.Sword;
+         //需要补上动画
         }
         return;
     }

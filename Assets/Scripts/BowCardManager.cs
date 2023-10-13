@@ -84,7 +84,8 @@ public class BowCardManager: MonoBehaviour
         }
         else
         {//是普通弓
-            //TODO
+            Player.Instance.player_state = Player.Player_State.Bow;
+           //需要补上动画
         }
         return;
     }
