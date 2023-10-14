@@ -7,7 +7,6 @@ TagManager:
   - Floor
   - Wall
   - DestroyableWall
-  - Hero
   - Enemy
   - Arrow
   - SwordCard
@@ -49,12 +48,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: background
     uniqueID: 2499998501
     locked: 0
-  - name: tilemap
-    uniqueID: 2626283173
+  - name: TileMap
+    uniqueID: 2517083453
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0

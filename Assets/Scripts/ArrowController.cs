@@ -31,7 +31,7 @@ public class ArrowController : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag == "Hero")
+        if (collision.collider.tag == "Player")
             return;
         if (collision.collider.tag == "Enemy")
         {
