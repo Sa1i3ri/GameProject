@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     public static Player Instance;
     public float speed;
+    public float detectDistance;
     public GameObject ArrowPrefab;
     //public Animation attack;
     //private Animator animator;
@@ -17,6 +18,8 @@ public class Player : MonoBehaviour
     private bool left;
     private bool right;
     private SpriteRenderer sr;
+    private Rigidbody2D rb;
+    private Vector2 currentPosition;
 
     void Awake()
     {
@@ -49,8 +52,10 @@ public class Player : MonoBehaviour
     {
         //animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
         player_state = Player_State.Walk;
         direction = Direction.Left;
+        currentPosition = this.transform.position;
     }
 
     // Update is called once per frame
@@ -104,28 +109,63 @@ public class Player : MonoBehaviour
             isMoving = true;
             direction = Direction.Right;
         }
-
-
     }
 
     private void Move()
     {
-        if (up == true)
+        //人物移动
+        if (isMoving == true)
         {
-            this.transform.Translate(Vector2.up * Time.deltaTime * speed, Space.World);
+            if (left == true)
+            {
+                if (transform.position.x != currentPosition.x - 1)
+                {
+                    Vector2 target = new Vector2(currentPosition.x - 1, currentPosition.y);
+                    rb.MovePosition(Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime));
+                }
+                else
+                {
+                    currentPosition.x -= 1;
+                }
+            }
+            else if (right == true)
+            {
+                if (transform.position.x != currentPosition.x + 1)
+                {
+                    Vector2 target = new Vector2(currentPosition.x + 1, currentPosition.y);
+                    rb.MovePosition(Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime));
+                }
+                else
+                {
+                    currentPosition.x += 1;
+                }
+            }
+            else if (up == true)
+            {
+                if (transform.position.y != currentPosition.y + 1)
+                {
+                    Vector2 target = new Vector2(currentPosition.x, currentPosition.y + 1);
+                    rb.MovePosition(Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime));
+                }
+                else
+                {
+                    currentPosition.y += 1;
+                }
+            }
+            else if (down == true)
+            {
+                if (transform.position.y != currentPosition.y - 1)
+                {
+                    Vector2 target = new Vector2(currentPosition.x, currentPosition.y - 1);
+                    rb.MovePosition(Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime));
+                }
+                else
+                {
+                    currentPosition.y -= 1;
+                }
+            }
         }
-        else if (down == true)
-        {
-            this.transform.Translate(Vector2.down * Time.deltaTime * speed, Space.World);
-        }
-        else if (left == true)
-        {
-            this.transform.Translate(Vector2.left * Time.deltaTime * speed, Space.World);
-        }
-        else if (right == true)
-        {
-            this.transform.Translate(Vector2.right * Time.deltaTime * speed, Space.World);
-        }
+        //人物朝向
         if (direction == Direction.Left)
         {
             sr.flipX = false;
@@ -133,6 +173,43 @@ public class Player : MonoBehaviour
         else if (direction == Direction.Right)
         {
             sr.flipX = true;
+        }
+        //检测是否需要停下
+        if (right == true)
+        {
+            if (Physics2D.Raycast(rb.position, Vector2.right, detectDistance, 1 << LayerMask.NameToLayer("Default")))
+            {
+                isMoving = false;
+                right = false;
+                this.transform.position = currentPosition;
+            }
+        }
+        else if (left == true)
+        {
+            if (Physics2D.Raycast(rb.position, Vector2.left, detectDistance, 1 << LayerMask.NameToLayer("Default")))
+            {
+                isMoving = false;
+                left = false;
+                this.transform.position = currentPosition;
+            }
+        }
+        else if (up == true)
+        {
+            if (Physics2D.Raycast(rb.position, Vector2.up, detectDistance, 1 << LayerMask.NameToLayer("Default")))
+            {
+                isMoving = false;
+                up = false;
+                this.transform.position = currentPosition;
+            }
+        }
+        else if (down == true)
+        {
+            if (Physics2D.Raycast(rb.position, Vector2.down, detectDistance, 1 << LayerMask.NameToLayer("Default")))
+            {
+                isMoving = false;
+                down = false;
+                this.transform.position = currentPosition;
+            }
         }
     }
 
@@ -147,22 +224,22 @@ public class Player : MonoBehaviour
         {
             if (up == true)
             {
-                this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 0.5f, 0);
+                this.transform.position = currentPosition;
                 up = false;
             }
             if (down == true)
             {
-                this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, 0);
+                this.transform.position = currentPosition;
                 down = false;
             }
             if (left == true)
             {
-                this.transform.position = new Vector3(this.transform.position.x + 0.5f, this.transform.position.y, 0);
+                this.transform.position = currentPosition;
                 left = false;
             }
             if (right == true)
             {
-                this.transform.position = new Vector3(this.transform.position.x - 0.5f, this.transform.position.y, 0);
+                this.transform.position = currentPosition;
                 right = false;
             }
             isMoving = false;
