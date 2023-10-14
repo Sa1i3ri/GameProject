@@ -55,7 +55,5 @@ public class CameraController : MonoBehaviour
         position.x += moveX * speed * Time.deltaTime;
         position.y += moveY * speed * Time.deltaTime;
         this.transform.position = position;
-        rb.isKinematic = false;
-        rb.velocity = new Vector2(0, 0);
     }
 }

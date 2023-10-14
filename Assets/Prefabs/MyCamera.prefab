@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4009172204064772244}
   - component: {fileID: 5629348992775127806}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: CameraConfiner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 802190037419878994}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.37, y: 0.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -91,7 +91,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2135071333159495371}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MyCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2863051195390501707}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1, y: 0, z: -2260}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 6286493233648238906}
   - component: {fileID: 7276219742502418257}
   - component: {fileID: 2662189493528998728}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 7126717129264190319}
   - component: {fileID: 8906110757067084123}
   - component: {fileID: 3519186224923466415}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -233,7 +233,7 @@ Transform:
   m_GameObject: {fileID: 7222574046219031531}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.10247421, y: -0.0014657974, z: -410}
+  m_LocalPosition: {x: -2.6467013, y: -1.0804048, z: -68660}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -354,7 +354,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7222574046219031531}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
@@ -384,7 +384,7 @@ GameObject:
   - component: {fileID: 110639364847917599}
   - component: {fileID: 3173154808696083584}
   - component: {fileID: 6792280359547361893}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Virtual Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
