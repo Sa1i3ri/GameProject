@@ -32,20 +32,19 @@ public class SwordCardManager : MonoBehaviour
         this.SwordText = text;
     }
 
-    public void PickUpCard(Card card)
+    public void PickUpCard()
     {
-        if (card.getName().Equals("Sword"))
-        {
-            this.SwordNum++;
-
-        }
+        this.SwordNum++;
         updateText();
 
     }
     //isRelease：是否要释放技能
     public void UseCard(bool isRelease)
     {
-
+        if(Player.Instance.player_state == Player.Player_State.Sword)
+        {
+            return;
+        }
 
         Button button = GetComponent<Button>();
         if (button.tag == "SwordCard")
@@ -88,12 +87,14 @@ public class SwordCardManager : MonoBehaviour
         if (isUpgraded)
         {//是升级剑
             GetComponent<Image>().color = new Color(255, 255, 255);
+            Player.Instance.player_state = Player.Player_State.Sword;
             UpgradeSwordCard.Instance.DownGradeSword();
             //TODO
 
         }
         else
         {//是普通剑
+            Debug.Log("release");
             Player.Instance.player_state = Player.Player_State.Sword;
          //需要补上动画
         }

@@ -246,20 +246,41 @@ public class Player : MonoBehaviour
         }
         if (collision.collider.tag == "Enemy")
         {
+            Debug.Log("tag");
             if (player_state == Player_State.Sword)
             {
+                Debug.Log("state");
                 SwordAttack(collision);
                 player_state = Player_State.Walk;  // 砍完一次怪就会失去剑
             }
             else Die();
         }
 
+
+
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "SwordCard")
+        {
+            Destroy(collision.gameObject);
+            SwordCardManager.Instance.PickUpCard();
+        }
+
+        if (collision.tag == "BowCard")
+        {
+            Destroy(collision.gameObject);
+            BowCardManager.Instance.PickUpCard();
+        }
     }
 
     public void SwordAttack(Collision2D collision)
     {
         //播放砍人动画 
         //TODO
+        Debug.Log("SwordAttack");
         EnemyController enemy = collision.collider.GetComponent<EnemyController>();
         enemy.Die();
     }

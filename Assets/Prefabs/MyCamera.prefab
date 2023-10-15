@@ -76,11 +76,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -10.649662, y: 8.634838}
-      - {x: -10.466391, y: -8.343286}
-      - {x: 8.686714, y: -8.20826}
-      - {x: 8.714935, y: -8.067848}
-      - {x: 8.479572, y: 8.38282}
+    - - {x: -19.889292, y: 12.496908}
+      - {x: -19.74404, y: -13.139637}
+      - {x: 1.0182168, y: -12.873343}
+      - {x: 8.570473, y: -12.776479}
+      - {x: 17.840498, y: -12.475277}
+      - {x: 18.792519, y: 11.978735}
   m_UseDelaunayMesh: 0
 --- !u!1 &2863051195390501707
 GameObject:
@@ -233,7 +234,7 @@ Transform:
   m_GameObject: {fileID: 7222574046219031531}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.6467013, y: -1.0804048, z: -68660}
+  m_LocalPosition: {x: -7.1597757, y: -3.5870044, z: -103740}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -275,7 +276,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -355,7 +356,7 @@ Rigidbody2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7222574046219031531}
   m_BodyType: 2
-  m_Simulated: 1
+  m_Simulated: 0
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
   m_Mass: 1

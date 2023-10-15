@@ -26,20 +26,19 @@ public class BowCardManager: MonoBehaviour
         this.BowText = text;
     }
 
-    public void PickUpCard(Card card)
+    public void PickUpCard()
     {
-        if (card.getName().Equals("Bow"))
-        {
-            this.BowNum++;
-
-        }
+        this.BowNum++;
         updateText();
 
     }
     //isRelease：是否要释放技能
     public void UseCard(bool isRelease)
     {
-
+        if (Player.Instance.player_state == Player.Player_State.Bow)
+        {
+            return;
+        }
 
         Button button = GetComponent<Button>();
         if (button.tag == "BowCard")
