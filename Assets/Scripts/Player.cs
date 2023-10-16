@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public float speed;
     public float detectDistance;
     public GameObject ArrowPrefab;
+    public Vector3 initialPosition;
     //public Animation attack;
     //private Animator animator;
 
@@ -55,6 +56,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         player_state = Player_State.Walk;
         direction = Direction.Left;
+        this.transform.position = initialPosition;
         currentPosition = this.transform.position;
     }
 
