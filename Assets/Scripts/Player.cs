@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     public float speed;
     public float detectDistance;
     public GameObject ArrowPrefab;
+    public GameObject ArrowPlusPrefab;
+    public LayerMask enemyLayer; // 敌人的层
     //public Animation attack;
     //private Animator animator;
 
@@ -34,7 +36,9 @@ public class Player : MonoBehaviour
     {
         Walk,
         Sword,
+        SwordPlus,
         Bow,
+        BowPlus,
         Bomb,   //催城
         Dead,
     };
@@ -85,6 +89,11 @@ public class Player : MonoBehaviour
         if (player_state == Player_State.Bow)
         {//射箭时不会移动
             BowAttack();
+            return;
+        }
+        else if (player_state == Player_State.BowPlus)
+        {
+            BowAttackPlus();
             return;
         }
         if (Input.GetKeyDown(KeyCode.W))
@@ -215,34 +224,39 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag == "DestroyableWall" && player_state == Player_State.Bomb)
-        {
-            BombAttack(collision);
-            return;
-        }
+        Vector2 dir = Vector2.zero;
         if (collision.collider.tag == "Wall" || collision.collider.tag == "Enemy" || collision.collider.tag == "DestroyableWall")
         {
             if (up == true)
             {
+                dir = new Vector2(0, 1);
                 this.transform.position = currentPosition;
                 up = false;
             }
             if (down == true)
             {
+                dir = new Vector2(0, -1);
                 this.transform.position = currentPosition;
                 down = false;
             }
             if (left == true)
             {
+                dir = new Vector2(-1, 0);
                 this.transform.position = currentPosition;
                 left = false;
             }
             if (right == true)
             {
+                dir = new Vector2(1, 0);
                 this.transform.position = currentPosition;
                 right = false;
             }
             isMoving = false;
+        }
+        if (collision.collider.tag == "DestroyableWall" && player_state == Player_State.Bomb)
+        {
+            BombAttack(collision);
+            return;
         }
         if (collision.collider.tag == "Enemy")
         {
@@ -252,6 +266,11 @@ public class Player : MonoBehaviour
                 Debug.Log("state");
                 SwordAttack(collision);
                 player_state = Player_State.Walk;  // 砍完一次怪就会失去剑
+            }
+            else if (player_state == Player_State.SwordPlus)
+            {
+                SwordAttackPlus(dir);
+                player_state = Player_State.Walk;
             }
             else Die();
         }
@@ -283,6 +302,35 @@ public class Player : MonoBehaviour
         Debug.Log("SwordAttack");
         EnemyController enemy = collision.collider.GetComponent<EnemyController>();
         enemy.Die();
+    }
+    public float attackAngle = 45f; // 加强剑攻击的扇形角度（度数不是弧度）
+    public float attackDistance = 3f; // 加强剑攻击的距离
+    public void SwordAttackPlus(Vector2 attackDirection)
+    {
+        // 检测在扇形范围内的敌人
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, attackDistance, enemyLayer);
+
+        foreach (Collider2D hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag("Enemy"))
+            {
+                // 检查是否在扇形范围内
+                Vector2 toEnemy = hitCollider.transform.position - transform.position;
+                float angleToEnemy = Vector2.Angle(attackDirection, toEnemy);
+
+                if (angleToEnemy <= attackAngle / 2f)
+                {
+                    // 获取敌人的脚本
+                    EnemyController enemy = hitCollider.GetComponent<EnemyController>();
+
+                    if (enemy != null)
+                    {
+                        enemy.Die();
+                    }
+                }
+            }
+
+        }
     }
     public void BowAttack()
     {
@@ -317,12 +365,44 @@ public class Player : MonoBehaviour
 
 
     }
+    public void BowAttackPlus()
+    {
+        Vector2 dir = Vector2.zero;
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            dir = new Vector2(0, 1);
+        }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            dir = new Vector2(0, -1);
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            dir = new Vector2(-1, 0);
+            direction = Direction.Left;
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            dir = new Vector2(1, 0);
+            direction = Direction.Right;
+        }
+
+        if (dir != Vector2.zero)
+        {
+            // 播放动画
+            GameObject arrow = Instantiate(ArrowPlusPrefab, this.transform.position, Quaternion.identity);
+            ArrowPlusController arrowPlusController = arrow.GetComponent<ArrowPlusController>();
+            arrowPlusController.Move(dir);
+            player_state = Player_State.Walk;
+        }
+    }
     private void BombAttack(Collision2D collision)
     {
         //播放摧城动画
         DWallController wall = collision.collider.GetComponent<DWallController>();
         wall.Bomb();
     }
+
     public void Die()
     {
         //animator.SetBool("Dead", true); // 播放死亡动画
