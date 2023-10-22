@@ -25,3 +25,14 @@
 1. 关于标签：Player的标签都用“Player”， Hero标签已删除
 2. 关于排序图层：background最下面，用于给地板，剩下的地图布置（如墙）都用TileMap，其他暂时都用default
 
+## 关于卡牌效果
+
+1. 记得在DWall预制体中的脚本和player中的脚本面板将enemyLayer设置为敌人所在的图层！
+1. 摧城会爆死垃圾堆周围圆形范围距离1的敌人，调整时直接调整explosion radius（DWall预制体中的脚本面板）
+1. 升级剑会攻击前方45度角、半径3 扇形范围内的敌人，调整角度和半径通过player脚本面板最下面的Attack angle 和distance。 **注意**：angle要用度数（360°的那个度）而不是弧度
+1. 普通箭的最大飞行距离请在ArrowController里面的Destroy语句，把后面的常数修改（这个常数的意思是，这个对象从创建之时开始，几秒后会自行销毁）
+
+
+
+
+

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DWallController : MonoBehaviour
 {
+    public LayerMask enemyLayer; // 敌人的层
     public float explosionRadius;// 爆炸半径
     // Start is called before the first frame update
     void Start()
@@ -19,7 +20,8 @@ public class DWallController : MonoBehaviour
 
     public void Bomb()
     {
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
+        Destroy(gameObject);
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius, enemyLayer);
 
         foreach (Collider2D hitCollider in hitColliders)
         {

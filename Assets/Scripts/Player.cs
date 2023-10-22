@@ -9,8 +9,9 @@ public class Player : MonoBehaviour
     public float speed;
     public float detectDistance;
     public GameObject ArrowPrefab;
-    //public Animation attack;
-    //private Animator animator;
+    public GameObject ArrowPlusPrefab;
+    public LayerMask enemyLayer; // 敌人的层
+    public Animator animator;
 
     private bool isMoving;
     private bool up;
@@ -34,7 +35,9 @@ public class Player : MonoBehaviour
     {
         Walk,
         Sword,
+        SwordPlus,
         Bow,
+        BowPlus,
         Bomb,   //催城
         Dead,
     };
@@ -50,7 +53,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         player_state = Player_State.Walk;
@@ -61,30 +64,48 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (player_state == Player_State.Dead) return;
         MoveControl();
     }
 
     private void FixedUpdate()
     {
+        if (player_state == Player_State.Dead) return;
+        if (isMoving) animator.SetBool("isMoving", true);
         Move();
+        if (!isMoving) animator.SetBool("isMoving", false);
+    }
+    void setNormalIdle()
+    {
+        animator.SetBool("SwordOn", false);
+        animator.SetBool("BowOn", false);
+        animator.SetBool("BombOn", false);
+        animator.SetBool("U-SwordOn", false);
+        animator.SetBool("U-Bow", false);
+    }
+    public void setAnimeOn(string weapon)
+    {
+        setNormalIdle();
+        animator.SetBool(weapon, true);
     }
 
     private void MoveControl()
     {
+        if (isMoving)
+            return;
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             player_state = Player_State.Walk;
-            // 需要相应的UI动画，激活功能，下同
-            // TODO
+            setNormalIdle();
         }
-
-        if (isMoving)
-            return;
-
-
         if (player_state == Player_State.Bow)
         {//射箭时不会移动
             BowAttack();
+            return;
+        }
+        else if (player_state == Player_State.BowPlus)
+        {
+            BowAttackPlus();
             return;
         }
         if (Input.GetKeyDown(KeyCode.W))
@@ -215,34 +236,39 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag == "DestroyableWall" && player_state == Player_State.Bomb)
-        {
-            BombAttack(collision);
-            return;
-        }
+        Vector2 dir = Vector2.zero;
         if (collision.collider.tag == "Wall" || collision.collider.tag == "Enemy" || collision.collider.tag == "DestroyableWall")
         {
             if (up == true)
             {
+                dir = new Vector2(0, 1);
                 this.transform.position = currentPosition;
                 up = false;
             }
             if (down == true)
             {
+                dir = new Vector2(0, -1);
                 this.transform.position = currentPosition;
                 down = false;
             }
             if (left == true)
             {
+                dir = new Vector2(-1, 0);
                 this.transform.position = currentPosition;
                 left = false;
             }
             if (right == true)
             {
+                dir = new Vector2(1, 0);
                 this.transform.position = currentPosition;
                 right = false;
             }
             isMoving = false;
+        }
+        if (collision.collider.tag == "DestroyableWall" && player_state == Player_State.Bomb)
+        {
+            BombAttack(collision);
+            return;
         }
         if (collision.collider.tag == "Enemy")
         {
@@ -252,6 +278,12 @@ public class Player : MonoBehaviour
                 Debug.Log("state");
                 SwordAttack(collision);
                 player_state = Player_State.Walk;  // 砍完一次怪就会失去剑
+                setNormalIdle();
+            }
+            else if (player_state == Player_State.SwordPlus)
+            {
+                SwordAttackPlus(dir);
+                player_state = Player_State.Walk;
             }
             else Die();
         }
@@ -278,11 +310,40 @@ public class Player : MonoBehaviour
 
     public void SwordAttack(Collision2D collision)
     {
-        //播放砍人动画 
-        //TODO
+        animator.SetTrigger("SwordAttack");
         Debug.Log("SwordAttack");
         EnemyController enemy = collision.collider.GetComponent<EnemyController>();
         enemy.Die();
+    }
+    public float attackAngle = 45f; // 加强剑攻击的扇形角度（度数不是弧度）
+    public float attackDistance = 3f; // 加强剑攻击的距离
+    public void SwordAttackPlus(Vector2 attackDirection)
+    {
+        animator.SetTrigger("SwordAttack");
+        // 检测在扇形范围内的敌人
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, attackDistance, enemyLayer);
+
+        foreach (Collider2D hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag("Enemy"))
+            {
+                // 检查是否在扇形范围内
+                Vector2 toEnemy = hitCollider.transform.position - transform.position;
+                float angleToEnemy = Vector2.Angle(attackDirection, toEnemy);
+
+                if (angleToEnemy <= attackAngle / 2f)
+                {
+                    // 获取敌人的脚本
+                    EnemyController enemy = hitCollider.GetComponent<EnemyController>();
+
+                    if (enemy != null)
+                    {
+                        enemy.Die();
+                    }
+                }
+            }
+
+        }
     }
     public void BowAttack()
     {
@@ -308,24 +369,59 @@ public class Player : MonoBehaviour
 
         if (dir != Vector2.zero)
         {
-            // 播放动画
+            animator.SetTrigger("BowAttack");
             GameObject arrow = Instantiate(ArrowPrefab, this.transform.position, Quaternion.identity);
             ArrowController arrowController = arrow.GetComponent<ArrowController>();
             arrowController.Move(dir);
             player_state = Player_State.Walk;
+            setNormalIdle();
         }
 
 
     }
+    public void BowAttackPlus()
+    {
+        Vector2 dir = Vector2.zero;
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            dir = new Vector2(0, 1);
+        }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            dir = new Vector2(0, -1);
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            dir = new Vector2(-1, 0);
+            direction = Direction.Left;
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            dir = new Vector2(1, 0);
+            direction = Direction.Right;
+        }
+
+        if (dir != Vector2.zero)
+        {
+            //animator.SetTrigger("BowAttackPlus");
+            GameObject arrow = Instantiate(ArrowPlusPrefab, this.transform.position, Quaternion.identity);
+            ArrowPlusController arrowPlusController = arrow.GetComponent<ArrowPlusController>();
+            arrowPlusController.Move(dir);
+            player_state = Player_State.Walk;
+        }
+    }
     private void BombAttack(Collision2D collision)
     {
-        //播放摧城动画
+        animator.SetTrigger("BombAttack");
         DWallController wall = collision.collider.GetComponent<DWallController>();
         wall.Bomb();
+        player_state = Player_State.Walk;
+        setNormalIdle();
     }
+
     public void Die()
     {
-        //animator.SetBool("Dead", true); // 播放死亡动画
+        animator.SetTrigger("Die");
         player_state = Player_State.Dead;
     }
 }
