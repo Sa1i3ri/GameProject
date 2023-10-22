@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class Player : MonoBehaviour
     private SpriteRenderer sr;
     private Rigidbody2D rb;
     private Vector2 currentPosition;
+
+    [SerializeField] int stepNum;
+    [SerializeField] Text stepText;
 
     void Awake()
     {
@@ -134,6 +138,7 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
+        stepText.text = "剩余步数：" + stepNum;
         //人物移动
         if (isMoving == true)
         {
@@ -200,6 +205,7 @@ public class Player : MonoBehaviour
         {
             if (Physics2D.Raycast(rb.position, Vector2.right, detectDistance, 1 << LayerMask.NameToLayer("Default")))
             {
+                stepNum--;
                 isMoving = false;
                 right = false;
                 this.transform.position = currentPosition;
@@ -209,6 +215,7 @@ public class Player : MonoBehaviour
         {
             if (Physics2D.Raycast(rb.position, Vector2.left, detectDistance, 1 << LayerMask.NameToLayer("Default")))
             {
+                stepNum--;
                 isMoving = false;
                 left = false;
                 this.transform.position = currentPosition;
@@ -218,6 +225,7 @@ public class Player : MonoBehaviour
         {
             if (Physics2D.Raycast(rb.position, Vector2.up, detectDistance, 1 << LayerMask.NameToLayer("Default")))
             {
+                stepNum--;
                 isMoving = false;
                 up = false;
                 this.transform.position = currentPosition;
@@ -227,6 +235,7 @@ public class Player : MonoBehaviour
         {
             if (Physics2D.Raycast(rb.position, Vector2.down, detectDistance, 1 << LayerMask.NameToLayer("Default")))
             {
+                stepNum--;
                 isMoving = false;
                 down = false;
                 this.transform.position = currentPosition;
@@ -239,6 +248,7 @@ public class Player : MonoBehaviour
         Vector2 dir = Vector2.zero;
         if (collision.collider.tag == "Wall" || collision.collider.tag == "Enemy" || collision.collider.tag == "DestroyableWall")
         {
+            stepNum--;
             if (up == true)
             {
                 dir = new Vector2(0, 1);
