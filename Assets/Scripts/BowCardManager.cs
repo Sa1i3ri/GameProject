@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BowCardManager: MonoBehaviour
+public class BowCardManager : MonoBehaviour
 {
     public static BowCardManager Instance;
     void Awake()
@@ -19,7 +19,7 @@ public class BowCardManager: MonoBehaviour
     public int BowNum = 5;
 
     //卡牌文本
-    [SerializeField]private Text BowText;
+    [SerializeField] private Text BowText;
 
     public BowCardManager(Text text)
     {
@@ -79,12 +79,12 @@ public class BowCardManager: MonoBehaviour
         {//是升级弓
             GetComponent<Image>().color = new Color(255, 255, 255);
             UpgradeBowCard.Instance.DownGradeBow();
-            //TODO
+            Player.Instance.setAnimeOn("U-BowOn");
         }
         else
         {//是普通弓
             Player.Instance.player_state = Player.Player_State.Bow;
-           //需要补上动画
+            Player.Instance.setAnimeOn("BowOn");
         }
         return;
     }

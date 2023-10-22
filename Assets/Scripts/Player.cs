@@ -11,8 +11,7 @@ public class Player : MonoBehaviour
     public GameObject ArrowPrefab;
     public GameObject ArrowPlusPrefab;
     public LayerMask enemyLayer; // 敌人的层
-    //public Animation attack;
-    //private Animator animator;
+    public Animator animator;
 
     private bool isMoving;
     private bool up;
@@ -54,7 +53,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         player_state = Player_State.Walk;
@@ -65,27 +64,40 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (player_state == Player_State.Dead) return;
         MoveControl();
     }
 
     private void FixedUpdate()
     {
+        if (player_state == Player_State.Dead) return;
+        if (isMoving) animator.SetBool("isMoving", true);
         Move();
+        if (!isMoving) animator.SetBool("isMoving", false);
+    }
+    void setNormalIdle()
+    {
+        animator.SetBool("SwordOn", false);
+        animator.SetBool("BowOn", false);
+        animator.SetBool("BombOn", false);
+        animator.SetBool("U-SwordOn", false);
+        animator.SetBool("U-Bow", false);
+    }
+    public void setAnimeOn(string weapon)
+    {
+        setNormalIdle();
+        animator.SetBool(weapon, true);
     }
 
     private void MoveControl()
     {
+        if (isMoving)
+            return;
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             player_state = Player_State.Walk;
-            // 需要相应的UI动画，激活功能，下同
-            // TODO
+            setNormalIdle();
         }
-
-        if (isMoving)
-            return;
-
-
         if (player_state == Player_State.Bow)
         {//射箭时不会移动
             BowAttack();
@@ -266,6 +278,7 @@ public class Player : MonoBehaviour
                 Debug.Log("state");
                 SwordAttack(collision);
                 player_state = Player_State.Walk;  // 砍完一次怪就会失去剑
+                setNormalIdle();
             }
             else if (player_state == Player_State.SwordPlus)
             {
@@ -297,8 +310,7 @@ public class Player : MonoBehaviour
 
     public void SwordAttack(Collision2D collision)
     {
-        //播放砍人动画 
-        //TODO
+        animator.SetTrigger("SwordAttack");
         Debug.Log("SwordAttack");
         EnemyController enemy = collision.collider.GetComponent<EnemyController>();
         enemy.Die();
@@ -307,6 +319,7 @@ public class Player : MonoBehaviour
     public float attackDistance = 3f; // 加强剑攻击的距离
     public void SwordAttackPlus(Vector2 attackDirection)
     {
+        animator.SetTrigger("SwordAttack");
         // 检测在扇形范围内的敌人
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, attackDistance, enemyLayer);
 
@@ -356,11 +369,12 @@ public class Player : MonoBehaviour
 
         if (dir != Vector2.zero)
         {
-            // 播放动画
+            animator.SetTrigger("BowAttack");
             GameObject arrow = Instantiate(ArrowPrefab, this.transform.position, Quaternion.identity);
             ArrowController arrowController = arrow.GetComponent<ArrowController>();
             arrowController.Move(dir);
             player_state = Player_State.Walk;
+            setNormalIdle();
         }
 
 
@@ -389,7 +403,7 @@ public class Player : MonoBehaviour
 
         if (dir != Vector2.zero)
         {
-            // 播放动画
+            //animator.SetTrigger("BowAttackPlus");
             GameObject arrow = Instantiate(ArrowPlusPrefab, this.transform.position, Quaternion.identity);
             ArrowPlusController arrowPlusController = arrow.GetComponent<ArrowPlusController>();
             arrowPlusController.Move(dir);
@@ -398,14 +412,16 @@ public class Player : MonoBehaviour
     }
     private void BombAttack(Collision2D collision)
     {
-        //播放摧城动画
+        animator.SetTrigger("BombAttack");
         DWallController wall = collision.collider.GetComponent<DWallController>();
         wall.Bomb();
+        player_state = Player_State.Walk;
+        setNormalIdle();
     }
 
     public void Die()
     {
-        //animator.SetBool("Dead", true); // 播放死亡动画
+        animator.SetTrigger("Die");
         player_state = Player_State.Dead;
     }
 }
