@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class SwordCardManager : MonoBehaviour
 {
     public static SwordCardManager Instance;
-
+    AudioSource audioSource;
+    public AudioClip pick_sound;
 
 
     //¿¨ÅÆÊýÁ¿
@@ -23,6 +24,7 @@ public class SwordCardManager : MonoBehaviour
         {
             Instance = this;
         }
+        audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -34,6 +36,8 @@ public class SwordCardManager : MonoBehaviour
 
     public void PickUpCard()
     {
+        audioSource.clip = pick_sound;
+        audioSource.Play();
         this.SwordNum++;
         updateText();
 

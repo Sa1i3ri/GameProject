@@ -27,12 +27,20 @@
 
 ## 关于卡牌效果
 
+> @Kevin
+
 1. 记得在DWall预制体中的脚本和player中的脚本面板将enemyLayer设置为敌人所在的图层！
 1. 摧城会爆死垃圾堆周围圆形范围距离1的敌人，调整时直接调整explosion radius（DWall预制体中的脚本面板）
 1. 升级剑会攻击前方45度角、半径3 扇形范围内的敌人，调整角度和半径通过player脚本面板最下面的Attack angle 和distance。 **注意**：angle要用度数（360°的那个度）而不是弧度
 1. 普通箭的最大飞行距离请在ArrowController里面的Destroy语句，把后面的常数修改（这个常数的意思是，这个对象从创建之时开始，几秒后会自行销毁）
 
+## 关于音效
 
+> @Kevin
+
+1. 主BGM在MyCamera预制体
+2. 捡卡音效在CardManager脚本中，记得在挂载该脚本的对象中加入组件AudioSource
+3. 其他音效均在player预制体中，不用管
 
 
 
