@@ -7,13 +7,16 @@ using UnityEngine.UI;
 public class BowCardManager : MonoBehaviour
 {
     public static BowCardManager Instance;
+    AudioSource audioSource;
+    public AudioClip pick_sound;
+
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
         }
-
+        audioSource = GetComponent<AudioSource>();
     }
     //卡牌数量
     public int BowNum = 5;
@@ -28,9 +31,10 @@ public class BowCardManager : MonoBehaviour
 
     public void PickUpCard()
     {
+        audioSource.clip = pick_sound;
+        audioSource.Play();
         this.BowNum++;
         updateText();
-
     }
     //isRelease：是否要释放技能
     public void UseCard(bool isRelease)

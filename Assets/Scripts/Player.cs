@@ -6,6 +6,14 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    AudioSource audioSource;
+    public AudioClip footStep;
+    public AudioClip sword_sound;
+    public AudioClip bow_sound;
+    public AudioClip bowplus_sound;
+    public AudioClip bomb_sound;
+    public AudioClip pickCard_sound;
+
     public static Player Instance;
     public float speed;
     public float detectDistance;
@@ -57,6 +65,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
@@ -142,10 +151,16 @@ public class Player : MonoBehaviour
         //人物移动
         if (isMoving == true)
         {
+
+            audioSource.clip = footStep;
+            if (!audioSource.isPlaying)
+                audioSource.Play();
+
             if (stepNum <= 0)
             {
                 return;
             }
+
             if (left == true)
             {
                 if (transform.position.x != currentPosition.x - 1)
@@ -306,16 +321,15 @@ public class Player : MonoBehaviour
 
 
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
         if (collision.tag == "SwordCard")
         {
             Destroy(collision.gameObject);
             SwordCardManager.Instance.PickUpCard();
         }
-
-        if (collision.tag == "BowCard")
+        else if (collision.tag == "BowCard")
         {
             Destroy(collision.gameObject);
             BowCardManager.Instance.PickUpCard();
@@ -325,6 +339,8 @@ public class Player : MonoBehaviour
     public void SwordAttack(Collision2D collision)
     {
         animator.SetTrigger("SwordAttack");
+        audioSource.clip = sword_sound;
+        audioSource.Play();
         Debug.Log("SwordAttack");
         EnemyController enemy = collision.collider.GetComponent<EnemyController>();
         enemy.Die();
@@ -334,6 +350,8 @@ public class Player : MonoBehaviour
     public void SwordAttackPlus(Vector2 attackDirection)
     {
         animator.SetTrigger("SwordAttack");
+        audioSource.clip = sword_sound;
+        audioSource.Play();
         // 检测在扇形范围内的敌人
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, attackDistance, enemyLayer);
 
@@ -384,6 +402,8 @@ public class Player : MonoBehaviour
         if (dir != Vector2.zero)
         {
             animator.SetTrigger("BowAttack");
+            audioSource.clip = bow_sound;
+            audioSource.Play();
             GameObject arrow = Instantiate(ArrowPrefab, this.transform.position, Quaternion.identity);
             ArrowController arrowController = arrow.GetComponent<ArrowController>();
             arrowController.Move(dir);
@@ -417,7 +437,9 @@ public class Player : MonoBehaviour
 
         if (dir != Vector2.zero)
         {
-            //animator.SetTrigger("BowAttackPlus");
+            animator.SetTrigger("BowAttack");
+            audioSource.clip = bowplus_sound;
+            audioSource.Play();
             GameObject arrow = Instantiate(ArrowPlusPrefab, this.transform.position, Quaternion.identity);
             ArrowPlusController arrowPlusController = arrow.GetComponent<ArrowPlusController>();
             arrowPlusController.Move(dir);
@@ -427,6 +449,8 @@ public class Player : MonoBehaviour
     private void BombAttack(Collision2D collision)
     {
         animator.SetTrigger("BombAttack");
+        audioSource.clip = bomb_sound;
+        audioSource.Play();
         DWallController wall = collision.collider.GetComponent<DWallController>();
         wall.Bomb();
         player_state = Player_State.Walk;
@@ -439,5 +463,7 @@ public class Player : MonoBehaviour
         player_state = Player_State.Dead;
     }
 }
+
+
 
 
