@@ -142,6 +142,10 @@ public class Player : MonoBehaviour
         //人物移动
         if (isMoving == true)
         {
+            if (stepNum <= 0)
+            {
+                return;
+            }
             if (left == true)
             {
                 if (transform.position.x != currentPosition.x - 1)
