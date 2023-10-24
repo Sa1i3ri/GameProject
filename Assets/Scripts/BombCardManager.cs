@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class BombCardManager : MonoBehaviour
 {
     public static BombCardManager Instance;
+    AudioSource audioSource;
+    public AudioClip pick_sound;
     void Awake()
     {
         if (Instance == null)
@@ -28,6 +30,8 @@ public class BombCardManager : MonoBehaviour
 
     public void PickUpCard()
     {
+        audioSource.clip = pick_sound;
+        audioSource.Play();
         this.BombNum++;
         updateText();
 
@@ -73,8 +77,8 @@ public class BombCardManager : MonoBehaviour
     {
 
 
-         Player.Instance.player_state = Player.Player_State.Bomb;
-         //需要补上动画
+        Player.Instance.player_state = Player.Player_State.Bomb;
+        Player.Instance.setAnimeOn("BombOn");
 
         return;
     }

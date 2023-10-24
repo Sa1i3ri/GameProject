@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         if (player_state == Player_State.Dead) return;
-        if (isMoving) animator.SetBool("isMoving", true);
+        //if (isMoving) animator.SetBool("isMoving", true);
         Move();
         if (!isMoving) animator.SetBool("isMoving", false);
     }
@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
         animator.SetBool("BowOn", false);
         animator.SetBool("BombOn", false);
         animator.SetBool("U-SwordOn", false);
-        animator.SetBool("U-Bow", false);
+        animator.SetBool("U-BowOn", false);
     }
     public void setAnimeOn(string weapon)
     {
@@ -125,23 +125,27 @@ public class Player : MonoBehaviour
         {
             up = true;
             isMoving = true;
+            animator.SetBool("isMoving", true);
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
             down = true;
             isMoving = true;
+            animator.SetBool("isMoving", true);
         }
         else if (Input.GetKeyDown(KeyCode.A))
         {
             left = true;
             isMoving = true;
             direction = Direction.Left;
+            animator.SetBool("isMoving", true);
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
             right = true;
             isMoving = true;
             direction = Direction.Right;
+            animator.SetBool("isMoving", true);
         }
     }
 
@@ -343,7 +347,7 @@ public class Player : MonoBehaviour
     public float attackDistance = 3f; // 加强剑攻击的距离
     public void SwordAttackPlus(Vector2 attackDirection)
     {
-        animator.SetTrigger("SwordAttack");
+        animator.SetTrigger("U-SwordAttack");
         audioSource.clip = sword_sound;
         audioSource.Play();
         // 检测在扇形范围内的敌人
@@ -370,6 +374,7 @@ public class Player : MonoBehaviour
             }
 
         }
+        setNormalIdle();
     }
     public void BowAttack()
     {
@@ -431,13 +436,14 @@ public class Player : MonoBehaviour
 
         if (dir != Vector2.zero)
         {
-            animator.SetTrigger("BowAttack");
+            animator.SetTrigger("U-BowAttack");
             audioSource.clip = bowplus_sound;
             audioSource.Play();
             GameObject arrow = Instantiate(ArrowPlusPrefab, this.transform.position, Quaternion.identity);
             ArrowPlusController arrowPlusController = arrow.GetComponent<ArrowPlusController>();
             arrowPlusController.Move(dir);
             player_state = Player_State.Walk;
+            setNormalIdle();
         }
     }
     private void BombAttack(Collision2D collision)

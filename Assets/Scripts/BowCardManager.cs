@@ -39,7 +39,7 @@ public class BowCardManager : MonoBehaviour
     //isRelease：是否要释放技能
     public void UseCard(bool isRelease)
     {
-        if (Player.Instance.player_state == Player.Player_State.Bow)
+        if (Player.Instance.player_state == Player.Player_State.Bow || Player.Instance.player_state == Player.Player_State.BowPlus)
         {
             return;
         }
@@ -83,6 +83,7 @@ public class BowCardManager : MonoBehaviour
         {//是升级弓
             GetComponent<Image>().color = new Color(255, 255, 255);
             UpgradeBowCard.Instance.DownGradeBow();
+            Player.Instance.player_state = Player.Player_State.BowPlus;
             Player.Instance.setAnimeOn("U-BowOn");
         }
         else

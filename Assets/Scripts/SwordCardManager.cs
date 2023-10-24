@@ -45,7 +45,7 @@ public class SwordCardManager : MonoBehaviour
     //isRelease：是否要释放技能
     public void UseCard(bool isRelease)
     {
-        if (Player.Instance.player_state == Player.Player_State.Sword)
+        if (Player.Instance.player_state == Player.Player_State.Sword || Player.Instance.player_state == Player.Player_State.SwordPlus)
         {
             return;
         }
@@ -91,10 +91,9 @@ public class SwordCardManager : MonoBehaviour
         if (isUpgraded)
         {//是升级剑
             GetComponent<Image>().color = new Color(255, 255, 255);
-            Player.Instance.player_state = Player.Player_State.Sword;
-            UpgradeSwordCard.Instance.DownGradeSword();
+            Player.Instance.player_state = Player.Player_State.SwordPlus;
             Player.Instance.setAnimeOn("U-SwordOn");
-
+            UpgradeSwordCard.Instance.DownGradeSword();
         }
         else
         {//是普通剑
