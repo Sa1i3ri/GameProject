@@ -151,15 +151,9 @@ public class Player : MonoBehaviour
         //人物移动
         if (isMoving == true)
         {
-
             audioSource.clip = footStep;
             if (!audioSource.isPlaying)
                 audioSource.Play();
-
-            if (stepNum <= 0)
-            {
-                return;
-            }
 
             if (left == true)
             {
