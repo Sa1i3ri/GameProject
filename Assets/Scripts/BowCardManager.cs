@@ -19,7 +19,7 @@ public class BowCardManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
     //卡牌数量
-    public int BowNum = 5;
+    [SerializeField] public int BowNum = 5;
 
     //卡牌文本
     [SerializeField] private Text BowText;
@@ -50,9 +50,28 @@ public class BowCardManager : MonoBehaviour
             Debug.Log("bow --");
             if (this.BowNum > 0)
             {
+
+
+
+
                 this.BowNum--;
                 if (isRelease)
                 {
+                    
+                    if (Player.Instance.player_state == Player.Player_State.Sword|| Player.Instance.player_state == Player.Player_State.SwordPlus)
+                    {
+                        SwordCardManager.Instance.SwordNum++;
+                        SwordCardManager.Instance.updateText();
+                    }
+
+                    if (Player.Instance.player_state == Player.Player_State.Bomb)
+                    {
+                        BombCardManager.Instance.BombNum += 1;
+                        BombCardManager.Instance.updateText();
+                    }
+
+
+
                     useBow(UpgradeBowCard.Instance.isUpgraded);
 
                 }
@@ -88,6 +107,7 @@ public class BowCardManager : MonoBehaviour
         }
         else
         {//是普通弓
+            Debug.Log("release");
             Player.Instance.player_state = Player.Player_State.Bow;
             Player.Instance.setAnimeOn("BowOn");
         }

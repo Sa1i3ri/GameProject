@@ -153,7 +153,7 @@ public class Player : MonoBehaviour
     {
         stepText.text = "剩余步数：" + stepNum;
         //人物移动
-        if (isMoving == true)
+        if (isMoving == true && this.stepNum>0)
         {
             audioSource.clip = footStep;
             if (!audioSource.isPlaying)

@@ -51,8 +51,23 @@ public class BombCardManager : MonoBehaviour
             if (this.BombNum > 0)
             {
                 this.BombNum--;
+
+
+
+
                 if (isRelease)
                 {
+                    if (Player.Instance.player_state == Player.Player_State.Sword || Player.Instance.player_state == Player.Player_State.SwordPlus)
+                    {
+                        SwordCardManager.Instance.SwordNum++;
+                        SwordCardManager.Instance.updateText();
+                    }
+
+                    if (Player.Instance.player_state == Player.Player_State.Bow || Player.Instance.player_state == Player.Player_State.BowPlus)
+                    {
+                        BowCardManager.Instance.BowNum += 1;
+                        BowCardManager.Instance.updateText();
+                    }
                     useBomb();
 
                 }

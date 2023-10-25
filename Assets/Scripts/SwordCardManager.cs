@@ -57,8 +57,23 @@ public class SwordCardManager : MonoBehaviour
             if (this.SwordNum > 0)
             {
                 this.SwordNum--;
+
+
+
+
                 if (isRelease)
                 {
+                    if (Player.Instance.player_state == Player.Player_State.Bow || Player.Instance.player_state == Player.Player_State.BowPlus)
+                    {
+                        BowCardManager.Instance.BowNum += 1;
+                        BowCardManager.Instance.updateText();
+                    }
+
+                    if (Player.Instance.player_state == Player.Player_State.Bomb)
+                    {
+                        BombCardManager.Instance.BombNum += 1;
+                        BombCardManager.Instance.updateText();
+                    }
 
                     useSword(UpgradeSwordCard.Instance.isUpgraded);
 
@@ -80,7 +95,7 @@ public class SwordCardManager : MonoBehaviour
         GetComponent<Image>().color = Color.blue;
     }
 
-    public void updateText()
+    public  void updateText()
     {
         this.SwordText.text = this.SwordNum.ToString();
     }
