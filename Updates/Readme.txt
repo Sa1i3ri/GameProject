@@ -1,2 +1,2 @@
 player的全套animation引入
-如果人物四肢拆开了说明骨骼绑定失败，如果没有出现异常，用updates里面的文件替换掉原有的文件（player的预制体，sprites里面的人物）
+player的预制体发生改变，同时替换掉sprites里面的人物图片
