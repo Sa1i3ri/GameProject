@@ -24,6 +24,12 @@ public class CameraController : MonoBehaviour
     }
     void Move()
     {
+        if (Player.Instance.isMoving)
+        {
+            this.transform.position = Player.Instance.transform.position;
+            return;
+        }
+
         moveX = 0;
         moveY = 0;
 
