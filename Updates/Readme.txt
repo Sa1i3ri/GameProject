@@ -1,2 +1,0 @@
-player的全套animation引入
-player的预制体发生改变，同时替换掉sprites里面的人物图片
