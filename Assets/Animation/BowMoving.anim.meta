@@ -1,0 +1,19 @@
+<<<<<<< HEAD:Updates/Animation/Die.anim.meta
+fileFormatVersion: 2
+guid: 052a7b5828e49e1448693530e416453b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+=======
+fileFormatVersion: 2
+guid: 96b3c3bd00d414740aa902c4f754fb25
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+>>>>>>> 6b2d6a99d72e591612732942bb867dc5f30500f5:Assets/Animation/BowMoving.anim.meta
