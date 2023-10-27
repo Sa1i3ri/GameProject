@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.U2D.Animation;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     AudioSource audioSource;
+    [Header("音效")]
     public AudioClip footStep;
     public AudioClip sword_sound;
     public AudioClip bow_sound;
@@ -15,6 +17,8 @@ public class Player : MonoBehaviour
     public AudioClip pickCard_sound;
 
     public static Player Instance;
+    [Header("人物设置")]
+    public bool isMoving;
     public float speed;
     public float detectDistance;
     public GameObject ArrowPrefab;
@@ -22,7 +26,7 @@ public class Player : MonoBehaviour
     public LayerMask enemyLayer; // 敌人的层
     public Animator animator;
 
-    private bool isMoving;
+
     private bool up;
     private bool down;
     private bool left;
@@ -30,6 +34,7 @@ public class Player : MonoBehaviour
     private SpriteRenderer sr;
     private Rigidbody2D rb;
     private Vector2 currentPosition;
+    private SpriteResolver resolver;
 
     [SerializeField] int stepNum;
     [SerializeField] Text stepText;
@@ -72,6 +77,8 @@ public class Player : MonoBehaviour
         player_state = Player_State.Walk;
         direction = Direction.Left;
         currentPosition = this.transform.position;
+        resolver = GetComponent<SpriteResolver>();
+        resolver.SetCategoryAndLabel(resolver.GetCategory(), "人物");
     }
 
     // Update is called once per frame
@@ -85,8 +92,33 @@ public class Player : MonoBehaviour
     {
         if (player_state == Player_State.Dead) return;
         //if (isMoving) animator.SetBool("isMoving", true);
+        skin();
         Move();
         if (!isMoving) animator.SetBool("isMoving", false);
+    }
+
+    void skin()
+    {
+        if (animator.GetBool("SwordOn") == true)
+        {
+            resolver.SetCategoryAndLabel(resolver.GetCategory(), "人物 剑");
+        }
+        else if (animator.GetBool("U-SwordOn") == true)
+        {
+            resolver.SetCategoryAndLabel(resolver.GetCategory(), "人物 升级剑");
+        }
+        else if (animator.GetBool("BowOn") == true)
+        {
+            resolver.SetCategoryAndLabel(resolver.GetCategory(), "人物 弓");
+        }
+        else if (animator.GetBool("U-BowOn") == true)
+        {
+            resolver.SetCategoryAndLabel(resolver.GetCategory(), "人物 升级弓");
+        }
+        else if (animator.GetBool("BombOn") == true)
+        {
+            resolver.SetCategoryAndLabel(resolver.GetCategory(), "人物");
+        }
     }
     void setNormalIdle()
     {
@@ -153,7 +185,7 @@ public class Player : MonoBehaviour
     {
         stepText.text = "剩余步数：" + stepNum;
         //人物移动
-        if (isMoving == true && this.stepNum>0)
+        if (isMoving == true && this.stepNum > 0)
         {
             audioSource.clip = footStep;
             if (!audioSource.isPlaying)
@@ -463,7 +495,3 @@ public class Player : MonoBehaviour
         player_state = Player_State.Dead;
     }
 }
-
-
-
-
