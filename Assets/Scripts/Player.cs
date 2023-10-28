@@ -26,6 +26,13 @@ public class Player : MonoBehaviour
     public GameObject ArrowPlusPrefab;
     public LayerMask enemyLayer; // 敌人的层
     public Animator animator;
+    [Header("人物贴图")]
+    public Sprite normal_idle;
+    public Sprite sword_idle;
+    public Sprite Usword_idle;
+    public Sprite bow_idle;
+    public Sprite Ubow_idle;
+    public Sprite bomb_idle;
 
 
     private bool up;
@@ -35,7 +42,6 @@ public class Player : MonoBehaviour
     private SpriteRenderer sr;
     private Rigidbody2D rb;
     private Vector2 currentPosition;
-    private SpriteResolver resolver;
 
     [SerializeField] int stepNum;
     [SerializeField] Text stepText;
@@ -59,7 +65,7 @@ public class Player : MonoBehaviour
         SwordPlus,
         Bow,
         BowPlus,
-        Bomb,   //催城
+        Bomb,   //摧城
         Dead,
     };
     public Player_State player_state;
@@ -81,8 +87,7 @@ public class Player : MonoBehaviour
         player_state = Player_State.Walk;
         direction = Direction.Left;
         currentPosition = this.transform.position;
-        resolver = GetComponent<SpriteResolver>();
-        resolver.SetCategoryAndLabel(resolver.GetCategory(), "人物");
+        sr.sprite = normal_idle;
     }
 
     // Update is called once per frame
@@ -95,58 +100,46 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         if (player_state == Player_State.Dead) return;
-        //if (isMoving) animator.SetBool("isMoving", true);
-        skin();
         Move();
         if (!isMoving) animator.SetBool("isMoving", false);
     }
 
-    void skin()
+    private float GetAnimationLength()
     {
-        if (animator.GetBool("SwordOn") == true)
+        if (animator != null)
         {
-            resolver.SetCategoryAndLabel(resolver.GetCategory(), "人物 剑");
+            AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0);
+            if (clipInfo.Length > 0)
+            {
+                return clipInfo[0].clip.length;
+            }
         }
-        else if (animator.GetBool("U-SwordOn") == true)
-        {
-            resolver.SetCategoryAndLabel(resolver.GetCategory(), "人物 升级剑");
-        }
-        else if (animator.GetBool("BowOn") == true)
-        {
-            resolver.SetCategoryAndLabel(resolver.GetCategory(), "人物 弓");
-        }
-        else if (animator.GetBool("U-BowOn") == true)
-        {
-            resolver.SetCategoryAndLabel(resolver.GetCategory(), "人物 升级弓");
-        }
-        else if (animator.GetBool("BombOn") == true)
-        {
-            resolver.SetCategoryAndLabel(resolver.GetCategory(), "人物");
-        }
+        return 0f;
     }
-    void setNormalIdle()
+    void skin(bool needWait)
+    {
+        StartCoroutine(ChangeStateAndTextureAsync(needWait));
+    }
+    void setNormalIdle(bool needWait)
     {
         animator.SetBool("SwordOn", false);
         animator.SetBool("BowOn", false);
         animator.SetBool("BombOn", false);
         animator.SetBool("U-SwordOn", false);
         animator.SetBool("U-BowOn", false);
+        skin(needWait);
     }
     public void setAnimeOn(string weapon)
     {
-        setNormalIdle();
+        setNormalIdle(false);
         animator.SetBool(weapon, true);
+        skin(false);
     }
 
     private void MoveControl()
     {
         if (isMoving)
             return;
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            player_state = Player_State.Walk;
-            setNormalIdle();
-        }
         if (player_state == Player_State.Bow)
         {//射箭时不会移动
             BowAttack();
@@ -309,7 +302,9 @@ public class Player : MonoBehaviour
 
 
 
+
         if (collision.collider.tag == "Wall" || collision.collider.tag == "Enemy"||collision.collider.tag=="EliteEnemy" || collision.collider.tag == "DestroyableWall" || collision.collider.tag=="Door")
+
         {
             Debug.Log("wall");
             stepNum--;
@@ -342,7 +337,7 @@ public class Player : MonoBehaviour
                 this.transform.position = currentPosition;
                 right = false;
             }
-            isMoving = false;
+            if (collision.collider.tag != "Enemy") isMoving = false;
 
             if (collision.collider.tag == "Door")
             {
@@ -368,14 +363,16 @@ public class Player : MonoBehaviour
                 Debug.Log("state");
                 SwordAttack(collision);
                 player_state = Player_State.Walk;  // 砍完一次怪就会失去剑
-                setNormalIdle();
+                setNormalIdle(true);
             }
             else if (player_state == Player_State.SwordPlus)
             {
                 SwordAttackPlus(dir);
                 player_state = Player_State.Walk;
+                setNormalIdle(true);
             }
             else Die();
+            isMoving = false;
         }
 
 
@@ -396,7 +393,8 @@ public class Player : MonoBehaviour
         {
             Destroy(collision.gameObject);
             BowCardManager.Instance.PickUpCard();
-        }else if(collision.tag == "BombCard")
+        }
+        else if (collision.tag == "BombCard")
         {
             Destroy(collision.gameObject);
             BombCardManager.Instance.PickUpCard();
@@ -451,7 +449,7 @@ public class Player : MonoBehaviour
             }
 
         }
-        setNormalIdle();
+        setNormalIdle(true);
     }
     public void BowAttack()
     {
@@ -484,7 +482,7 @@ public class Player : MonoBehaviour
             ArrowController arrowController = arrow.GetComponent<ArrowController>();
             arrowController.Move(dir);
             player_state = Player_State.Walk;
-            setNormalIdle();
+            setNormalIdle(true);
         }
 
 
@@ -520,7 +518,7 @@ public class Player : MonoBehaviour
             ArrowPlusController arrowPlusController = arrow.GetComponent<ArrowPlusController>();
             arrowPlusController.Move(dir);
             player_state = Player_State.Walk;
-            setNormalIdle();
+            setNormalIdle(true);
         }
     }
     private void BombAttack(Collision2D collision)
@@ -531,7 +529,7 @@ public class Player : MonoBehaviour
         DWallController wall = collision.collider.GetComponent<DWallController>();
         wall.Bomb();
         player_state = Player_State.Walk;
-        setNormalIdle();
+        setNormalIdle(true);
     }
 
     public void Die()
@@ -548,6 +546,39 @@ public class Player : MonoBehaviour
     {
         DeathRestart.backTo = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(this.deathMenuIndex);
+    }
+    IEnumerator ChangeStateAndTextureAsync(bool needWait)
+    {
+        if (needWait)
+        {
+            yield return new WaitForSeconds(0.01f);
+            float wait = GetAnimationLength();
+            yield return new WaitForSeconds(wait);
+        }
+
+        switch (player_state)
+        {
+            case Player_State.Walk:
+                sr.sprite = normal_idle;
+                break;
+            case Player_State.Sword:
+                sr.sprite = sword_idle;
+                break;
+            case Player_State.SwordPlus:
+                sr.sprite = Usword_idle;
+                break;
+            case Player_State.Bow:
+                sr.sprite = bow_idle;
+                break;
+            case Player_State.BowPlus:
+                sr.sprite = Ubow_idle;
+                break;
+            case Player_State.Bomb:
+                sr.sprite = bomb_idle;
+                break;
+        }
+        Debug.Log("sprite updated");
+        yield return null;
     }
 
 }

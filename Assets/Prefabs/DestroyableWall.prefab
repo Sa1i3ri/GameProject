@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3248080375975169577}
   - component: {fileID: 5809987113715388846}
   - component: {fileID: 7646252782188344738}
+  - component: {fileID: 7020247742420644324}
   m_Layer: 2
   m_Name: DestroyableWall
   m_TagString: DestroyableWall
@@ -119,7 +120,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0000002682209, y: -0.060549676}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -130,7 +131,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.6, y: 1.6}
+  m_Size: {x: 1.6000004, y: 1.4789008}
   m_EdgeRadius: 0
 --- !u!114 &5809987113715388846
 MonoBehaviour:
@@ -148,6 +149,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4
   explosionRadius: 1
+  clip: {fileID: 0}
 --- !u!50 &7646252782188344738
 Rigidbody2D:
   serializedVersion: 4
@@ -175,3 +177,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!95 &7020247742420644324
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464069534622249223}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 40f39d00a362598428d1dc3ffc527104, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
