@@ -8,7 +8,7 @@ public class DeathRestart : MonoBehaviour
 {
     [SerializeField] public static int backTo;
 
-    public void deathRestart()
+    public static void deathRestart()
     {
         SceneManager.LoadScene(backTo);
     }
