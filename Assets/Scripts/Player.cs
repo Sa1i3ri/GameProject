@@ -40,6 +40,8 @@ public class Player : MonoBehaviour
     [SerializeField] int stepNum;
     [SerializeField] Text stepText;
 
+    [SerializeField] int deathMenuIndex;
+
     void Awake()
     {
         if (Instance == null)
@@ -516,5 +518,15 @@ public class Player : MonoBehaviour
         animator.SetTrigger("Die");
         player_state = Player_State.Dead;
         EnemyController.EnemyNum = 0;
+
+        Invoke("toDeathMenu", 1.5f);
+
     }
+
+    public void toDeathMenu()
+    {
+        DeathRestart.backTo = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(this.deathMenuIndex);
+    }
+
 }
