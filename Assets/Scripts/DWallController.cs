@@ -6,10 +6,11 @@ public class DWallController : MonoBehaviour
 {
     public LayerMask enemyLayer; // 敌人的层
     public float explosionRadius;// 爆炸半径
+    private Animator animator;
     // Start is called before the first frame update
     void Start()
     {
-
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -20,7 +21,6 @@ public class DWallController : MonoBehaviour
 
     public void Bomb()
     {
-        Destroy(gameObject);
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius, enemyLayer);
 
         foreach (Collider2D hitCollider in hitColliders)
@@ -37,7 +37,7 @@ public class DWallController : MonoBehaviour
         }
 
         // 插入坍塌动画
-        //TODO
-        Destroy(gameObject);
+        animator.SetTrigger("Bomb");
+        Destroy(gameObject, 0.5f);
     }
 }

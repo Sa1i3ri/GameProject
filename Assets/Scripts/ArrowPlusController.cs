@@ -13,11 +13,11 @@ public class ArrowPlusController : MonoBehaviour
         moveForce = 800f;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    // // Update is called once per frame
+    // void Update()
+    // {
 
-    }
+    // }
     // 控制箭的移动
     public Vector2 direction = Vector2.zero;
     public void Move(UnityEngine.Vector2 moveDirection)
@@ -41,7 +41,7 @@ public class ArrowPlusController : MonoBehaviour
             Move(direction);
         }
 
-        if (collision.collider.tag == "Wall" || collision.collider.tag == "DestroyableWall")
+        if (collision.collider.tag == "Wall" || collision.collider.tag == "DestroyableWall" || collision.collider.tag == "Door")
             Destroy(gameObject);
     }
 }
