@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     //简单的相机移动，使用方向键控制
+    public bool isEnabled;
     public float speed = 100f;
     float moveX;
     float moveY;
@@ -20,6 +21,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!isEnabled) return;
         Move();
     }
     void Move()

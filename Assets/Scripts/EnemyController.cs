@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    //private Animator animator;
+    private Animator animator;
     private bool isDead = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        //    animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         isDead = false;
     }
 
@@ -24,14 +24,20 @@ public class EnemyController : MonoBehaviour
         if (!isDead)
         {
             isDead = true;
+            animator.SetBool("isDead", true);
             // 播放死亡动画
             //animator.SetTrigger("Die");
 
             // 在动画播放完后销毁敌人对象
             //float deathAnimationLength = GetDeathAnimationLength();
             //Destroy(gameObject, deathAnimationLength);
-            Destroy(gameObject);
+            Invoke("Des", 2.0f);
         }
+    }
+
+    private void Des()
+    {
+        Destroy(gameObject);
     }
 
     // private float GetDeathAnimationLength()
