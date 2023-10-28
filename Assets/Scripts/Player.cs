@@ -309,7 +309,7 @@ public class Player : MonoBehaviour
 
 
 
-        if (collision.collider.tag == "Wall" || collision.collider.tag == "Enemy" || collision.collider.tag == "DestroyableWall" || collision.collider.tag=="Door")
+        if (collision.collider.tag == "Wall" || collision.collider.tag == "Enemy"||collision.collider.tag=="EliteEnemy" || collision.collider.tag == "DestroyableWall" || collision.collider.tag=="Door")
         {
             Debug.Log("wall");
             stepNum--;
@@ -360,7 +360,7 @@ public class Player : MonoBehaviour
             BombAttack(collision);
             return;
         }
-        if (collision.collider.tag == "Enemy")
+        if (collision.collider.tag == "Enemy"|| collision.collider.tag == "EliteEnemy")
         {
             Debug.Log("tag");
             if (player_state == Player_State.Sword)
@@ -409,8 +409,16 @@ public class Player : MonoBehaviour
         audioSource.clip = sword_sound;
         audioSource.Play();
         Debug.Log("SwordAttack");
-        EnemyController enemy = collision.collider.GetComponent<EnemyController>();
-        enemy.Die();
+        if (collision.gameObject.tag == "Enemy")
+        {
+            EnemyController enemy = collision.collider.GetComponent<EnemyController>();
+            enemy.Die();
+        }
+        else if (collision.gameObject.tag == "EliteEnemy")
+        {
+            EliteEnemyController eliteEnemy = collision.collider.GetComponent<EliteEnemyController>();
+            eliteEnemy.Die();
+        }
     }
     public float attackAngle = 45f; // 加强剑攻击的扇形角度（度数不是弧度）
     public float attackDistance = 3f; // 加强剑攻击的距离
