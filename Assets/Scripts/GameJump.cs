@@ -34,6 +34,12 @@ public class GameJump : MonoBehaviour
         SceneManager.LoadScene(level_3);
     }
 
+    public void restart()
+    {
+        EnemyController.EnemyNum = 0;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
 
 
 }

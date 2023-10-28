@@ -1357,7 +1357,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4887035685262867337, guid: 23a021b5a35164148a9f938e38f913e5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -740700
+      value: -741000
       objectReference: {fileID: 0}
     - target: {fileID: 5629348992775127806, guid: 23a021b5a35164148a9f938e38f913e5, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].x
@@ -2185,7 +2185,7 @@ GameObject:
   - component: {fileID: 741343895}
   - component: {fileID: 741343894}
   - component: {fileID: 741343893}
-  - component: {fileID: 741343892}
+  - component: {fileID: 741343896}
   m_Layer: 5
   m_Name: Restart
   m_TagString: Untagged
@@ -2213,18 +2213,6 @@ RectTransform:
   m_AnchoredPosition: {x: -50, y: 116}
   m_SizeDelta: {x: 100, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &741343892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 741343890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e379c4367f282514aa521609850d9573, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &741343893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2269,8 +2257,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 741343892}
-        m_TargetAssemblyTypeName: Restart, Assembly-CSharp
+      - m_Target: {fileID: 741343896}
+        m_TargetAssemblyTypeName: GameJump, Assembly-CSharp
         m_MethodName: restart
         m_Mode: 1
         m_Arguments:
@@ -2319,6 +2307,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 741343890}
   m_CullTransparentMesh: 1
+--- !u!114 &741343896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741343890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18a7878bb48601d4d92d5e7a9992a3c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level_1: 0
+  level_2: 0
+  level_3: 0
 --- !u!1001 &759679279
 PrefabInstance:
   m_ObjectHideFlags: 0
