@@ -12,7 +12,7 @@ public class SwordCardManager : MonoBehaviour
 
 
     //卡牌数量
-    public int SwordNum = 5;
+    [SerializeField] public int SwordNum = 0;
 
     //卡牌文本
     [SerializeField] private Text SwordText;

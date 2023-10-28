@@ -19,7 +19,7 @@ public class BowCardManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
     //卡牌数量
-    [SerializeField] public int BowNum = 5;
+    [SerializeField] public int BowNum = 0;
 
     //卡牌文本
     [SerializeField] private Text BowText;

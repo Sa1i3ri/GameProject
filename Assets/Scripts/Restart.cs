@@ -7,6 +7,7 @@ public class Restart : MonoBehaviour
 {
     public void restart()
     {
+        EnemyController.EnemyNum = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

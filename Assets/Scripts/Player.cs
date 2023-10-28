@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.U2D.Animation;
 using UnityEngine.UI;
 
@@ -295,8 +296,12 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Vector2 dir = Vector2.zero;
-        if (collision.collider.tag == "Wall" || collision.collider.tag == "Enemy" || collision.collider.tag == "DestroyableWall")
+
+
+
+        if (collision.collider.tag == "Wall" || collision.collider.tag == "Enemy" || collision.collider.tag == "DestroyableWall" || collision.collider.tag=="Door")
         {
+            Debug.Log("wall");
             stepNum--;
             if (up == true)
             {
@@ -323,6 +328,17 @@ public class Player : MonoBehaviour
                 right = false;
             }
             isMoving = false;
+
+            if (collision.collider.tag == "Door")
+            {
+                Debug.Log("Door");
+
+                if (EnemyController.EnemyNum == 0)
+                {
+                    Debug.Log("to next");
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                }
+            }
         }
         if (collision.collider.tag == "DestroyableWall" && player_state == Player_State.Bomb)
         {
@@ -350,6 +366,8 @@ public class Player : MonoBehaviour
 
 
 
+
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -363,6 +381,10 @@ public class Player : MonoBehaviour
         {
             Destroy(collision.gameObject);
             BowCardManager.Instance.PickUpCard();
+        }else if(collision.tag == "BombCard")
+        {
+            Destroy(collision.gameObject);
+            BombCardManager.Instance.PickUpCard();
         }
     }
 
@@ -493,5 +515,6 @@ public class Player : MonoBehaviour
     {
         animator.SetTrigger("Die");
         player_state = Player_State.Dead;
+        EnemyController.EnemyNum = 0;
     }
 }

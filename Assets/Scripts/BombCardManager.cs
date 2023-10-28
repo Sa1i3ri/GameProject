@@ -16,9 +16,11 @@ public class BombCardManager : MonoBehaviour
             Instance = this;
         }
 
+        audioSource = GetComponent<AudioSource>();
+
     }
     //卡牌数量
-    public int BombNum = 5;
+    [SerializeField] public int BombNum = 0;
 
     //卡牌文本
     [SerializeField] private Text BombText;

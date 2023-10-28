@@ -7,7 +7,7 @@ public class EnemyController : MonoBehaviour
     //private Animator animator;
     private bool isDead = false;
 
-    public static int EnemyNum;
+    public static int EnemyNum ;
 
     private void Awake()
     {
