@@ -15,6 +15,7 @@ TagManager:
   - GarbageHeap
   - GarbageBin
   - BombCard
+  - EliteEnemy
   layers:
   - Default
   - TransparentFX
