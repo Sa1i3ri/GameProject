@@ -37,6 +37,7 @@ public class EnemyController : MonoBehaviour
             // 在动画播放完后销毁敌人对象
             //float deathAnimationLength = GetDeathAnimationLength();
             //Destroy(gameObject, deathAnimationLength);
+
             transform.GetComponent<BoxCollider2D>().enabled = false;
             EnemyNum--;
             Invoke("Des", 2.0f);

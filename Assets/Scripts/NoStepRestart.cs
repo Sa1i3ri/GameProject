@@ -4,13 +4,13 @@ using UnityEngine;
 using static Cinemachine.DocumentationSortingAttribute;
 using UnityEngine.SceneManagement;
 
-public class DeathRestart : MonoBehaviour
+public class NoStepRestart : MonoBehaviour
 {
-    [SerializeField] public static int backTo;
+    [SerializeField] public static int backToOrigin;
 
-    public static void deathRestart()
+    public static void noStepRestart()
     {
-        SceneManager.LoadScene(backTo);
+        SceneManager.LoadScene(backToOrigin);
     }
 
     public void toManu()

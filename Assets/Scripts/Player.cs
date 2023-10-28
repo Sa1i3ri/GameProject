@@ -40,7 +40,8 @@ public class Player : MonoBehaviour
     [SerializeField] int stepNum;
     [SerializeField] Text stepText;
 
-    [SerializeField] int deathMenuIndex;
+    int deathMenuIndex = 8;
+    int noStepIndex = 9;
 
     void Awake()
     {
@@ -293,6 +294,13 @@ public class Player : MonoBehaviour
                 this.transform.position = currentPosition;
             }
         }
+        if (stepNum <= 0)
+        {
+            NoStepRestart.backToOrigin = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(this.noStepIndex);
+        }
+
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -305,6 +313,11 @@ public class Player : MonoBehaviour
         {
             Debug.Log("wall");
             stepNum--;
+            if(stepNum <= 0)
+            {
+                NoStepRestart.backToOrigin = SceneManager.GetActiveScene().buildIndex;
+                SceneManager.LoadScene(this.noStepIndex);
+            }
             if (up == true)
             {
                 dir = new Vector2(0, 1);

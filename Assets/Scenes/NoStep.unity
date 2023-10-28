@@ -208,8 +208,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 75506972}
-        m_TargetAssemblyTypeName: DeathRestart, Assembly-CSharp
-        m_MethodName: deathRestart
+        m_TargetAssemblyTypeName: NoStepRestart, Assembly-CSharp
+        m_MethodName: noStepRestart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -266,7 +266,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 75506967}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95e646919f413b64084472e64de0e5d1, type: 3}
+  m_Script: {fileID: 11500000, guid: b97024b2260de094b89c474475bf1112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &204317364
@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 204317367}
   - component: {fileID: 204317366}
   m_Layer: 5
-  m_Name: Death
+  m_Name: NoStep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -303,8 +303,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -10, y: 106}
-  m_SizeDelta: {x: -625.50006, y: -300.25}
+  m_AnchoredPosition: {x: -1.6177063, y: 106}
+  m_SizeDelta: {x: -458.5805, y: -300.25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &204317366
 MonoBehaviour:
@@ -339,7 +339,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6B7B\u4EA1\uFF1F"
+  m_Text: "\u6B65\u6570\u4E0D\u591F\uFF0C\u8981\u653E\u5F03\u5417\uFF1F"
 --- !u!222 &204317367
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -566,7 +566,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4887035685262867337, guid: 23a021b5a35164148a9f938e38f913e5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -331310
+      value: -336680
       objectReference: {fileID: 0}
     - target: {fileID: 5629348992775127806, guid: 23a021b5a35164148a9f938e38f913e5, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].x
@@ -833,7 +833,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 561330694}
-        m_TargetAssemblyTypeName: DeathRestart, Assembly-CSharp
+        m_TargetAssemblyTypeName: NoStepRestart, Assembly-CSharp
         m_MethodName: toManu
         m_Mode: 1
         m_Arguments:
@@ -891,7 +891,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 561330689}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95e646919f413b64084472e64de0e5d1, type: 3}
+  m_Script: {fileID: 11500000, guid: b97024b2260de094b89c474475bf1112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1552260770

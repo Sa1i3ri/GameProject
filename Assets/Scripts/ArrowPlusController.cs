@@ -41,7 +41,7 @@ public class ArrowPlusController : MonoBehaviour
             Move(direction);
         }
 
-        if (collision.collider.tag == "Wall" || collision.collider.tag == "DestroyableWall")
+        if (collision.collider.tag == "Wall" || collision.collider.tag == "DestroyableWall" || collision.collider.tag == "Door")
             Destroy(gameObject);
     }
 }
