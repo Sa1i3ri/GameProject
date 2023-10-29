@@ -12,6 +12,24 @@ EditorBuildSettings:
     path: Assets/Scenes/Select Level.unity
     guid: 2e2c4c6caebe11843931ac74a97a0027
   - enabled: 1
+    path: Assets/Scenes/Tutorial walk.unity
+    guid: 860ce0dd0d47c6c4caa387d1918c2999
+  - enabled: 1
+    path: Assets/Scenes/Tutorial sword.unity
+    guid: 4e5b2cf1f637ecc48aa48cb2929c9b71
+  - enabled: 1
+    path: Assets/Scenes/Tutorial bow.unity
+    guid: 1466e209faecb054fb0349be31e3bf9c
+  - enabled: 1
+    path: Assets/Scenes/Tutorial bomb.unity
+    guid: 3da3a7e30328afa4bbf218554bddb7d0
+  - enabled: 1
+    path: Assets/Scenes/Tutorial sword puls.unity
+    guid: ff995dad900c3054d8fab3c69b5a533d
+  - enabled: 1
+    path: Assets/Scenes/Tutorial bow plus.unity
+    guid: c3fdcc2bc32b4e148a17448e68b9c612
+  - enabled: 1
     path: Assets/Scenes/Level 1 1.unity
     guid: b250129012d266844a5b57528b5ee6e1
   - enabled: 1

@@ -9,6 +9,7 @@ public class BowCardManager : MonoBehaviour
     public static BowCardManager Instance;
     AudioSource audioSource;
     public AudioClip pick_sound;
+    public AudioClip select_sound;
 
     void Awake()
     {
@@ -50,7 +51,8 @@ public class BowCardManager : MonoBehaviour
             Debug.Log("bow --");
             if (this.BowNum > 0)
             {
-
+                audioSource.clip = select_sound;
+                audioSource.Play();
 
 
 

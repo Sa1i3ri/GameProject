@@ -9,6 +9,7 @@ public class BombCardManager : MonoBehaviour
     public static BombCardManager Instance;
     AudioSource audioSource;
     public AudioClip pick_sound;
+    public AudioClip select_sound;
     void Awake()
     {
         if (Instance == null)
@@ -53,6 +54,9 @@ public class BombCardManager : MonoBehaviour
             if (this.BombNum > 0)
             {
                 this.BombNum--;
+
+                audioSource.clip = select_sound;
+                audioSource.Play();
 
 
 

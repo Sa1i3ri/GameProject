@@ -10,12 +10,11 @@ public class EliteEnemyController : MonoBehaviour
     private bool isDead = false;
     private SpriteResolver resolver;
     private int HP;
-    public static int EnemyNum;
 
     private void Awake()
     {
         EnemyController.EnemyNum++;
-        Debug.Log(EnemyNum);
+        Debug.Log(EnemyController.EnemyNum);
     }
     // Start is called before the first frame update
     void Start()
@@ -69,7 +68,7 @@ public class EliteEnemyController : MonoBehaviour
             //float deathAnimationLength = GetDeathAnimationLength();
             //Destroy(gameObject, deathAnimationLength);
             transform.GetComponent<BoxCollider2D>().enabled = false;
-            EnemyNum--;
+            EnemyController.EnemyNum--;
             Invoke("Des", 2.0f);
         }
     }

@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class GameJump : MonoBehaviour
 {
-
-    [SerializeField] public int level_1;
-    [SerializeField] public int level_2;
-    [SerializeField] public int level_3;
+    private int turtorial = 2;
+    private int level_1 = 8;
+    private int level_2 = 10;
+    private int level_3 = 12;
     public void startGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -17,6 +17,11 @@ public class GameJump : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public void ToTorturial()
+    {
+        SceneManager.LoadScene(this.turtorial);
     }
 
     public void ToLevel_1()

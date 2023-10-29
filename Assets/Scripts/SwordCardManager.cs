@@ -9,6 +9,7 @@ public class SwordCardManager : MonoBehaviour
     public static SwordCardManager Instance;
     AudioSource audioSource;
     public AudioClip pick_sound;
+    public AudioClip select_sound;
 
 
     //¿¨ÅÆÊýÁ¿
@@ -50,6 +51,8 @@ public class SwordCardManager : MonoBehaviour
             return;
         }
 
+
+
         Button button = GetComponent<Button>();
         if (button.tag == "SwordCard")
         {
@@ -57,7 +60,8 @@ public class SwordCardManager : MonoBehaviour
             if (this.SwordNum > 0)
             {
                 this.SwordNum--;
-
+                audioSource.clip = select_sound;
+                audioSource.Play();
 
 
 

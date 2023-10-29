@@ -46,8 +46,8 @@ public class Player : MonoBehaviour
     [SerializeField] int stepNum;
     [SerializeField] Text stepText;
 
-    int deathMenuIndex = 8;
-    int noStepIndex = 9;
+    int deathMenuIndex = 14;
+    int noStepIndex = 15;
 
     void Awake()
     {
