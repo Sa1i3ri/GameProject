@@ -30,15 +30,15 @@ public class ArrowPlusController : MonoBehaviour
         // 将角度应用旋转
         this.transform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.collider.tag == "Player")
+        if (collision.tag == "Player")
             return;
-        if (collision.collider.tag == "Enemy")
+        if (collision.tag == "Enemy")
         {
-            EnemyController enemy = collision.collider.GetComponent<EnemyController>();
+            EnemyController enemy = collision.GetComponent<EnemyController>();
             enemy.Die();
-            Move(direction);
+            //Move(direction);
         }
         else if (collision.collider.tag == "EliteEnemy")
         {
@@ -47,7 +47,7 @@ public class ArrowPlusController : MonoBehaviour
             Move(direction);
         }
 
-        if (collision.collider.tag == "Wall" || collision.collider.tag == "DestroyableWall" || collision.collider.tag == "Door")
+        if (collision.tag == "Wall" || collision.tag == "DestroyableWall" || collision.tag == "Door")
             Destroy(gameObject);
     }
 }
