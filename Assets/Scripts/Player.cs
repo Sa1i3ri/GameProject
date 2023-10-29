@@ -299,10 +299,6 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Vector2 dir = Vector2.zero;
-
-
-
-
         if (collision.collider.tag == "Wall" || collision.collider.tag == "Enemy"||collision.collider.tag=="EliteEnemy" || collision.collider.tag == "DestroyableWall" || collision.collider.tag=="Door")
 
         {
@@ -374,12 +370,6 @@ public class Player : MonoBehaviour
             else Die();
             isMoving = false;
         }
-
-
-
-
-
-
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -447,6 +437,23 @@ public class Player : MonoBehaviour
                     }
                 }
             }
+            else if (hitCollider.CompareTag("EliteEnemy"))
+            {
+                // 检查是否在扇形范围内
+                Vector2 toEnemy = hitCollider.transform.position - transform.position;
+                float angleToEnemy = Vector2.Angle(attackDirection, toEnemy);
+
+                if (angleToEnemy <= attackAngle / 2f)
+                {
+                    // 获取敌人的脚本
+                    EliteEnemyController eliteEnemy = hitCollider.GetComponent<EliteEnemyController>();
+
+                    if (eliteEnemy != null)
+                    {
+                        eliteEnemy.Die();
+                    }
+                }
+            }
 
         }
         setNormalIdle(true);
@@ -484,8 +491,6 @@ public class Player : MonoBehaviour
             player_state = Player_State.Walk;
             setNormalIdle(true);
         }
-
-
     }
     public void BowAttackPlus()
     {
