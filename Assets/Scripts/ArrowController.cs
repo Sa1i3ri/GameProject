@@ -38,6 +38,12 @@ public class ArrowController : MonoBehaviour
             EnemyController enemy = collision.collider.GetComponent<EnemyController>();
             enemy.Die();
         }
+        else if (collision.collider.tag == "EliteEnemy")
+        {
+            EliteEnemyController eliteEnemy = collision.collider.GetComponent<EliteEnemyController>();
+            eliteEnemy.Die();
+        }
+
 
         Destroy(gameObject);
     }

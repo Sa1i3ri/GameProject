@@ -40,6 +40,12 @@ public class ArrowPlusController : MonoBehaviour
             enemy.Die();
             //Move(direction);
         }
+        else if (collision.collider.tag == "EliteEnemy")
+        {
+            EliteEnemyController eliteEnemy = collision.collider.GetComponent<EliteEnemyController>();
+            eliteEnemy.Die();
+            Move(direction);
+        }
 
         if (collision.tag == "Wall" || collision.tag == "DestroyableWall" || collision.tag == "Door")
             Destroy(gameObject);
