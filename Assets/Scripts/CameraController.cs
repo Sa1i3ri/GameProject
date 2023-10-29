@@ -16,6 +16,7 @@ public class CameraController : MonoBehaviour
         moveX = 0;
         moveY = 0;
         rb = gameObject.GetComponent<Rigidbody2D>();
+        this.transform.position = Player.Instance.transform.position;
     }
 
     // Update is called once per frame
