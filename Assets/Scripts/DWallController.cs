@@ -37,6 +37,7 @@ public class DWallController : MonoBehaviour
         }
 
         // 插入坍塌动画
+        transform.GetComponent<BoxCollider2D>().enabled = false;
         animator.SetTrigger("Bomb");
         Destroy(gameObject, 0.5f);
     }

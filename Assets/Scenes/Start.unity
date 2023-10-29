@@ -269,6 +269,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18a7878bb48601d4d92d5e7a9992a3c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level_1: 0
+  level_2: 0
+  level_3: 0
 --- !u!1 &204317364
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,7 +306,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -10, y: 106}
+  m_AnchoredPosition: {x: -1, y: 110}
   m_SizeDelta: {x: -625.50006, y: -300.25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &204317366
@@ -319,7 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.81568867, g: 0.48490566, b: 1, a: 1}
+  m_Color: {r: 0.9433962, g: 0.27945885, b: 0.54256666, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -566,7 +569,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4887035685262867337, guid: 23a021b5a35164148a9f938e38f913e5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -315780
+      value: -318220
       objectReference: {fileID: 0}
     - target: {fileID: 5629348992775127806, guid: 23a021b5a35164148a9f938e38f913e5, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].x
@@ -651,7 +654,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.62985045, g: 0.8112107, b: 0.990566, a: 1}
+  m_Color: {r: 0.98189545, g: 0.6313726, b: 0.99215686, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -894,6 +897,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18a7878bb48601d4d92d5e7a9992a3c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level_1: 0
+  level_2: 0
+  level_3: 0
 --- !u!1 &1552260770
 GameObject:
   m_ObjectHideFlags: 0
