@@ -40,10 +40,11 @@ public class ArrowPlusController : MonoBehaviour
             enemy.Die();
             //Move(direction);
         }
-        else if (collision.GetComponent<Collider>().tag == "EliteEnemy")
+        else if (collision.tag == "EliteEnemy")
         {
-            EliteEnemyController eliteEnemy = collision.GetComponent<Collider>().GetComponent<EliteEnemyController>();
-            eliteEnemy.Die();
+            Debug.Log("bow eli");
+            EliteEnemyController eliteEnemy = collision.GetComponent<EliteEnemyController>();
+            eliteEnemy.Dead();
             Move(direction);
         }
 

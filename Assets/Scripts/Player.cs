@@ -505,7 +505,7 @@ public class Player : MonoBehaviour
 
                     if (eliteEnemy != null)
                     {
-                        eliteEnemy.Die();
+                        eliteEnemy.Dead();
                     }
                 }
             }
