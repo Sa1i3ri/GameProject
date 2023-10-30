@@ -46,8 +46,7 @@ public class Player : MonoBehaviour
     [SerializeField] int stepNum;
     [SerializeField] Text stepText;
 
-    int deathMenuIndex = 14;
-    int noStepIndex = 15;
+
 
     void Awake()
     {
@@ -91,18 +90,23 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
+    
     void Update()
     {
+        isQuit();
         if (player_state == Player_State.Dead) return;
         MoveControl();
     }
+    
 
-    private void FixedUpdate()
-    {
+    
+   private void FixedUpdate()
+   {
         if (player_state == Player_State.Dead) return;
         Move();
         if (!isMoving) animator.SetBool("isMoving", false);
     }
+    
 
     private float GetAnimationLength()
     {
@@ -135,11 +139,19 @@ public class Player : MonoBehaviour
         animator.SetBool(weapon, true);
         skin(false);
     }
+    private void isQuit()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)){
+            Application.Quit();
+        }
+    }
 
     private void MoveControl()
     {
         if (isMoving)
             return;
+
+
         if (player_state == Player_State.Bow)
         {//射箭时不会移动
             BowAttack();
@@ -150,20 +162,24 @@ public class Player : MonoBehaviour
             BowAttackPlus();
             return;
         }
+
         if (Input.GetKeyDown(KeyCode.W))
         {
+            stepNum--;
             up = true;
             isMoving = true;
             animator.SetBool("isMoving", true);
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
+            stepNum--;
             down = true;
             isMoving = true;
             animator.SetBool("isMoving", true);
         }
         else if (Input.GetKeyDown(KeyCode.A))
         {
+            stepNum--;
             left = true;
             isMoving = true;
             direction = Direction.Left;
@@ -171,19 +187,22 @@ public class Player : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
+            stepNum--;
             right = true;
             isMoving = true;
             direction = Direction.Right;
             animator.SetBool("isMoving", true);
         }
+
     }
 
     private void Move()
     {
         stepText.text = "剩余步数：" + stepNum;
         //人物移动
-        if (isMoving == true && this.stepNum > 0)
+        if (isMoving == true)
         {
+
             audioSource.clip = footStep;
             if (!audioSource.isPlaying)
                 audioSource.Play();
@@ -251,47 +270,83 @@ public class Player : MonoBehaviour
         {
             if (Physics2D.Raycast(rb.position, Vector2.right, detectDistance, 1 << LayerMask.NameToLayer("Default")))
             {
-                stepNum--;
+                
                 isMoving = false;
                 right = false;
                 this.transform.position = currentPosition;
+
+                if (stepNum <= 0)
+                {
+                    NoStepRestart.backToOrigin = SceneManager.GetActiveScene().buildIndex;
+                    SceneManager.LoadScene(GameJump.noStepIndex);
+                }
+
+
             }
+
+
+
         }
         else if (left == true)
         {
             if (Physics2D.Raycast(rb.position, Vector2.left, detectDistance, 1 << LayerMask.NameToLayer("Default")))
             {
-                stepNum--;
+
                 isMoving = false;
                 left = false;
                 this.transform.position = currentPosition;
+
+                if (stepNum <= 0)
+                {
+                    NoStepRestart.backToOrigin = SceneManager.GetActiveScene().buildIndex;
+                    SceneManager.LoadScene(GameJump.noStepIndex);
+                }
             }
+
         }
         else if (up == true)
         {
             if (Physics2D.Raycast(rb.position, Vector2.up, detectDistance, 1 << LayerMask.NameToLayer("Default")))
             {
-                stepNum--;
+
                 isMoving = false;
                 up = false;
                 this.transform.position = currentPosition;
+
+                if (stepNum <= 0)
+                {
+                    NoStepRestart.backToOrigin = SceneManager.GetActiveScene().buildIndex;
+                    SceneManager.LoadScene(GameJump.noStepIndex);
+                }
+
+
             }
+
         }
         else if (down == true)
         {
             if (Physics2D.Raycast(rb.position, Vector2.down, detectDistance, 1 << LayerMask.NameToLayer("Default")))
             {
-                stepNum--;
                 isMoving = false;
                 down = false;
                 this.transform.position = currentPosition;
+
+                if (stepNum <= 0)
+                {
+                    NoStepRestart.backToOrigin = SceneManager.GetActiveScene().buildIndex;
+                    SceneManager.LoadScene(GameJump.noStepIndex);
+                }
+
             }
+
         }
-        if (stepNum <= 0)
-        {
-            NoStepRestart.backToOrigin = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene(this.noStepIndex);
-        }
+
+
+
+
+
+
+
 
 
     }
@@ -303,11 +358,11 @@ public class Player : MonoBehaviour
 
         {
             Debug.Log("wall");
-            stepNum--;
+
             if(stepNum <= 0)
             {
                 NoStepRestart.backToOrigin = SceneManager.GetActiveScene().buildIndex;
-                SceneManager.LoadScene(this.noStepIndex);
+                SceneManager.LoadScene(GameJump.noStepIndex);
             }
             if (up == true)
             {
@@ -550,7 +605,7 @@ public class Player : MonoBehaviour
     public void toDeathMenu()
     {
         DeathRestart.backTo = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(this.deathMenuIndex);
+        SceneManager.LoadScene(GameJump.deathMenuIndex);
     }
     IEnumerator ChangeStateAndTextureAsync(bool needWait)
     {

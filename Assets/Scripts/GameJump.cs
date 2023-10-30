@@ -7,8 +7,10 @@ public class GameJump : MonoBehaviour
 {
     private int turtorial = 2;
     private int level_1 = 8;
-    private int level_2 = 10;
-    private int level_3 = 12;
+    private int level_2 = 11;
+    private int level_3 = 14;
+    public static int deathMenuIndex = 17;
+    public static int noStepIndex = 18;
     public void startGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
