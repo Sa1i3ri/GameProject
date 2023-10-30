@@ -65,6 +65,10 @@ public class DialogManager : MonoBehaviour
         textLabel.text = "";    //重置文本内容
 
         int word = 0;
+        if (textList[index][word] == '<')
+        {
+            isTyping = false;
+        }
         while (isTyping && word < textList[index].Length - 1)
         {
             textLabel.text += textList[index][word];
