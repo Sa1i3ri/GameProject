@@ -34,6 +34,16 @@ public class DWallController : MonoBehaviour
                     enemy.Die();
                 }
             }
+            if (hitCollider.CompareTag("EliteEnemy"))
+            {
+                EliteEnemyController eliteEnemy = hitCollider.GetComponent<EliteEnemyController>();
+
+                if (eliteEnemy != null)
+                {
+                    eliteEnemy.Dead();
+                }
+            }
+
         }
 
         // 插入坍塌动画
