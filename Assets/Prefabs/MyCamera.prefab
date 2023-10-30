@@ -331,7 +331,7 @@ Transform:
   m_GameObject: {fileID: 7222574046219031531}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.9797451, y: -2.6690605, z: -264960}
+  m_LocalPosition: {x: -1.9797451, y: -2.6690605, z: -265130}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -396,7 +396,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7222574046219031531}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &7126717129264190319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -443,6 +443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15d809b6728e676479a42fffda620356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnabled: 0
   speed: 200
 --- !u!50 &3519186224923466415
 Rigidbody2D:
