@@ -661,7 +661,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4887035685262867337, guid: 23a021b5a35164148a9f938e38f913e5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -434940
+      value: -435710
       objectReference: {fileID: 0}
     - target: {fileID: 5629348992775127806, guid: 23a021b5a35164148a9f938e38f913e5, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].x
@@ -702,6 +702,11 @@ PrefabInstance:
 --- !u!4 &368878505 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2135071333159495371, guid: 23a021b5a35164148a9f938e38f913e5, type: 3}
+  m_PrefabInstance: {fileID: 368878504}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &368878506 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7222574046219031531, guid: 23a021b5a35164148a9f938e38f913e5, type: 3}
   m_PrefabInstance: {fileID: 368878504}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &390382167
@@ -1211,7 +1216,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &724752673
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1437,7 +1442,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &742997936
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1608,7 +1613,7 @@ PrefabInstance:
     - target: {fileID: 3230741226017253057, guid: 7a1f7e0bd995df249ba65b60c928a092, type: 3}
       propertyPath: stepText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1028509829}
     - target: {fileID: 3230741226017253057, guid: 7a1f7e0bd995df249ba65b60c928a092, type: 3}
       propertyPath: bow_sound
       value: 
@@ -13410,8 +13415,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGodView: 1
-  godView: {fileID: 0}
-  characterView: {fileID: 0}
+  godView: {fileID: 1299333201}
+  characterView: {fileID: 368878506}
 --- !u!114 &1907247937
 MonoBehaviour:
   m_ObjectHideFlags: 0

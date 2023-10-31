@@ -2874,7 +2874,7 @@ PrefabInstance:
     - target: {fileID: 3230741226017253057, guid: 7a1f7e0bd995df249ba65b60c928a092, type: 3}
       propertyPath: stepText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 806824605}
     - target: {fileID: 3230741226017253057, guid: 7a1f7e0bd995df249ba65b60c928a092, type: 3}
       propertyPath: bow_sound
       value: 
@@ -4108,7 +4108,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4887035685262867337, guid: 23a021b5a35164148a9f938e38f913e5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -436630
+      value: -436880
       objectReference: {fileID: 0}
     - target: {fileID: 5629348992775127806, guid: 23a021b5a35164148a9f938e38f913e5, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].x
@@ -4153,6 +4153,11 @@ PrefabInstance:
 --- !u!4 &1163064121 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2135071333159495371, guid: 23a021b5a35164148a9f938e38f913e5, type: 3}
+  m_PrefabInstance: {fileID: 1163064120}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1163064122 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7222574046219031531, guid: 23a021b5a35164148a9f938e38f913e5, type: 3}
   m_PrefabInstance: {fileID: 1163064120}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1249405833
@@ -14746,8 +14751,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGodView: 1
-  godView: {fileID: 0}
-  characterView: {fileID: 0}
+  godView: {fileID: 885883970}
+  characterView: {fileID: 1163064122}
 --- !u!114 &1864934842
 MonoBehaviour:
   m_ObjectHideFlags: 0
