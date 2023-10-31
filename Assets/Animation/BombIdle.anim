@@ -44,7 +44,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0, y: 0, z: 30.902}
+        value: {x: 0, y: 0, z: 33.31}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -656,6 +656,15 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
+      path: 1997033069
+      attribute: 4
+      script: {fileID: 0}
+      typeID: 4
+      customType: 4
+      isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
+    - serializedVersion: 2
       path: 1806956327
       attribute: 4
       script: {fileID: 0}
@@ -711,15 +720,6 @@ AnimationClip:
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 2073732236
-      attribute: 4
-      script: {fileID: 0}
-      typeID: 4
-      customType: 4
-      isPPtrCurve: 0
-      isIntCurve: 0
-      isSerializeReferenceCurve: 0
-    - serializedVersion: 2
-      path: 1997033069
       attribute: 4
       script: {fileID: 0}
       typeID: 4
@@ -1175,7 +1175,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 30.902
+        value: 33.31
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -2936,7 +2936,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Body/bone_6
+    path: RightArm/bone_8
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2948,7 +2948,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Body/bone_6
+    path: RightArm/bone_8
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2960,7 +2960,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Body/bone_6
+    path: RightArm/bone_8
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3152,7 +3152,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: RightArm/bone_8
+    path: Body/bone_6
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3164,7 +3164,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: RightArm/bone_8
+    path: Body/bone_6
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -3176,7 +3176,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: RightArm/bone_8
+    path: Body/bone_6
     classID: 4
     script: {fileID: 0}
     flags: 0
