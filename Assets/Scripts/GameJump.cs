@@ -9,8 +9,8 @@ public class GameJump : MonoBehaviour
     private int level_1 = 9;
     private int level_2 = 13;
     private int level_3 = 18;
-    public static int deathMenuIndex = 23;
-    public static int noStepIndex = 24;
+    public static int deathMenuIndex = 24;
+    public static int noStepIndex = 25;
     public static int selectIndex = 2;
     public void startGame()
     {
