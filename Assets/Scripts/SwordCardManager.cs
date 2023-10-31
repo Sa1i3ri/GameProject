@@ -59,6 +59,7 @@ public class SwordCardManager : MonoBehaviour
             Debug.Log("sword --");
             if (this.SwordNum > 0)
             {
+
                 this.SwordNum--;
                 audioSource.clip = select_sound;
                 audioSource.Play();
@@ -109,13 +110,15 @@ public class SwordCardManager : MonoBehaviour
     {
         if (isUpgraded)
         {//是升级剑
-            GetComponent<Image>().color = new Color(255, 255, 255);
+         // GetComponent<Image>().color = new Color(255, 255, 255);
+            GetComponent<Image>().color = Color.red;
             Player.Instance.player_state = Player.Player_State.SwordPlus;
             Player.Instance.setAnimeOn("U-SwordOn");
             UpgradeSwordCard.Instance.DownGradeSword();
         }
         else
         {//是普通剑
+            GetComponent<Image>().color = Color.red;
             Debug.Log("release");
             Player.Instance.player_state = Player.Player_State.Sword;
             Player.Instance.setAnimeOn("SwordOn");

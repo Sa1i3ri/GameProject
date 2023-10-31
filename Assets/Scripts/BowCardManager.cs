@@ -51,6 +51,7 @@ public class BowCardManager : MonoBehaviour
             Debug.Log("bow --");
             if (this.BowNum > 0)
             {
+                GetComponent<Image>().color = new Color(253, 83, 75);
                 audioSource.clip = select_sound;
                 audioSource.Play();
 
@@ -102,13 +103,15 @@ public class BowCardManager : MonoBehaviour
     {
         if (isUpgraded)
         {//是升级弓
-            GetComponent<Image>().color = new Color(255, 255, 255);
+         //GetComponent<Image>().color = new Color(255, 255, 255);
+            GetComponent<Image>().color = Color.red;
             UpgradeBowCard.Instance.DownGradeBow();
             Player.Instance.player_state = Player.Player_State.BowPlus;
             Player.Instance.setAnimeOn("U-BowOn");
         }
         else
         {//是普通弓
+            GetComponent<Image>().color = Color.red;
             Debug.Log("release");
             Player.Instance.player_state = Player.Player_State.Bow;
             Player.Instance.setAnimeOn("BowOn");

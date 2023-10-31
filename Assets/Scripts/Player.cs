@@ -414,12 +414,14 @@ public class Player : MonoBehaviour
                 Debug.Log("state");
                 SwordAttack(collision);
                 player_state = Player_State.Walk;  // 砍完一次怪就会失去剑
+                SwordCardManager.Instance.GetComponent<Image>().color = new Color(255, 255, 255);
                 setNormalIdle(true);
             }
             else if (player_state == Player_State.SwordPlus)
             {
                 SwordAttackPlus(dir);
                 player_state = Player_State.Walk;
+                SwordCardManager.Instance.GetComponent<Image>().color = new Color(255, 255, 255);
                 setNormalIdle(true);
             }
             else Die();
@@ -544,6 +546,7 @@ public class Player : MonoBehaviour
             ArrowController arrowController = arrow.GetComponent<ArrowController>();
             arrowController.Move(dir);
             player_state = Player_State.Walk;
+            BowCardManager.Instance.GetComponent<Image>().color = new Color(255, 255, 255);
             setNormalIdle(true);
         }
     }
@@ -578,6 +581,7 @@ public class Player : MonoBehaviour
             ArrowPlusController arrowPlusController = arrow.GetComponent<ArrowPlusController>();
             arrowPlusController.Move(dir);
             player_state = Player_State.Walk;
+            BowCardManager.Instance.GetComponent<Image>().color = new Color(255, 255, 255);
             setNormalIdle(true);
         }
     }
@@ -589,6 +593,7 @@ public class Player : MonoBehaviour
         DWallController wall = collision.collider.GetComponent<DWallController>();
         wall.Bomb();
         player_state = Player_State.Walk;
+        BombCardManager.Instance.GetComponent<Image>().color = new Color(255, 255, 255);
         setNormalIdle(true);
     }
 

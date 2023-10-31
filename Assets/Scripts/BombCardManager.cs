@@ -53,6 +53,7 @@ public class BombCardManager : MonoBehaviour
             Debug.Log("bomb --");
             if (this.BombNum > 0)
             {
+                GetComponent<Image>().color = new Color(253, 83, 75);
                 this.BombNum--;
 
                 audioSource.clip = select_sound;
@@ -100,6 +101,7 @@ public class BombCardManager : MonoBehaviour
 
         Player.Instance.player_state = Player.Player_State.Bomb;
         Player.Instance.setAnimeOn("BombOn");
+        GetComponent<Image>().color = Color.red;
 
         return;
     }
