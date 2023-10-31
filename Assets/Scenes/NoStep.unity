@@ -384,8 +384,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 914, y: 419.6}
+  m_AnchoredPosition: {x: 0.000025511, y: 0.0000061989}
+  m_SizeDelta: {x: 904.4, y: 429.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &282877000
 MonoBehaviour:
@@ -402,6 +402,7 @@ MonoBehaviour:
   videoPlayer: {fileID: 282877001}
   "\u89C6\u9891\u6E90": {fileID: 32900000, guid: edafcddefc488a841ae742a1b2b2de7f, type: 3}
   rawImage: {fileID: 282877002}
+  isLoop: 1
   "\u6DE1\u5165\u901F\u5EA6": 1
 --- !u!328 &282877001
 VideoPlayer:
@@ -433,7 +434,7 @@ VideoPlayer:
   m_ControlledAudioTrackCount: 0
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
-  m_Looping: 0
+  m_Looping: 1
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
@@ -566,7 +567,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4887035685262867337, guid: 23a021b5a35164148a9f938e38f913e5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -336950
+      value: -339020
       objectReference: {fileID: 0}
     - target: {fileID: 5629348992775127806, guid: 23a021b5a35164148a9f938e38f913e5, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].x

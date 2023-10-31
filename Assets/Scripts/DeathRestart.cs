@@ -15,7 +15,17 @@ public class DeathRestart : MonoBehaviour
 
     public void toManu()
     {
+        SceneManager.LoadScene(GameJump.selectIndex);
+    }
+
+    public void toStart()
+    {
         SceneManager.LoadScene(0);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 
 

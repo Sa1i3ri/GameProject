@@ -5,12 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class GameJump : MonoBehaviour
 {
-    private int turtorial = 2;
-    private int level_1 = 8;
-    private int level_2 = 12;
-    private int level_3 = 17;
-    public static int deathMenuIndex = 22;
-    public static int noStepIndex = 23;
+    private int turtorial = 3;
+    private int level_1 = 9;
+    private int level_2 = 13;
+    private int level_3 = 18;
+    public static int deathMenuIndex = 23;
+    public static int noStepIndex = 24;
+    public static int selectIndex = 2;
     public void startGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

@@ -4,6 +4,7 @@ using UnityEngine;
 
 using UnityEngine.Video;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(VideoPlayer))]
 //挂载后会自动把VideoPlayer组件添加到game object
@@ -13,10 +14,10 @@ public class VideoPlay : MonoBehaviour
     [SerializeField] private VideoPlayer videoPlayer;//声明视频播放器组件
     [SerializeField] public VideoClip 视频源;//声明视频资源
     [SerializeField] private RawImage rawImage;//声明原始图像
+    [SerializeField] public bool isLoop = true;
     /*===注意：使用RawImage时，将使用每个存在的RawImage创建一个额外的绘制调用，因此最好只将其用于背景或临时可见的图形===*/
 
     //私有变量暴露到编辑器
-    [SerializeField]
     [Range(0f, 1f)] public float 淡入速度 = 1f;//播放速度
 
     private void Awake()
@@ -27,20 +28,22 @@ public class VideoPlay : MonoBehaviour
 
     void Start()
     {
-        videoPlayer.isLooping = true;//循环播放,如果只播放一次设置为false
         videoPlayer.clip = 视频源;//视频源
+
+        if (this.isLoop == false)
+        {
+            videoPlayer.loopPointReached += End;
+        }
     }
 
     void Update()
     {
         //只播放一次则取消注释
-        /*
-		if (videoPlayer.texture == null)
-        {
-			如果videoPlayer没有对应的视频texture,即视频播放结束,则返回
-            return;
-        }
-		*/
+
+
+
+
+
 
         //把VideoPlayerd的视频渲染到UGUI的RawImage
         rawImage.texture = videoPlayer.texture;//RawImage可以显示任何纹理，而Image组件只能显示Sprite纹理||videoPlayer.texture:视频内容的内部纹理（只读）
@@ -58,5 +61,15 @@ public class VideoPlay : MonoBehaviour
          * Color.white：纯白色。RGBA 为 (1, 1, 1, 1)
          * Time.deltaTime:  从最后一个帧到当前帧的间隔，以秒为单位(只读)。OnGUI不可靠，因为每个帧可能会多次调用它
          */
+    }
+
+    public void End(VideoPlayer thisPlay)
+    {
+        Debug.Log("end");
+        if (videoPlayer.isLooping == false)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
     }
 }
