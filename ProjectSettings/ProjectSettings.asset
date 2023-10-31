@@ -14,7 +14,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: "\u5357\u4EAC\u8499\u7279\u5229\u5C14\u5DE5\u4F5C\u5BA4"
   productName: "Re\uFF1A\u9713\u8679\u6B8B\u68A6"
-  defaultCursor: {fileID: 0}
+  defaultCursor: {fileID: 2800000, guid: 24498867805e5424a97fad81bf857eb7, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1
@@ -135,7 +135,7 @@ PlayerSettings:
   vulkanEnableLateAcquireNextImage: 0
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
-  bundleVersion: 1.0
+  bundleVersion: 2.0
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
