@@ -137,7 +137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1071244247207581230, guid: a3de3a575edc724499fbed1afee08444, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2263812148403193989, guid: a3de3a575edc724499fbed1afee08444, type: 3}
       propertyPath: textFile
@@ -465,7 +465,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4887035685262867337, guid: 23a021b5a35164148a9f938e38f913e5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -439360
+      value: -439590
       objectReference: {fileID: 0}
     - target: {fileID: 5629348992775127806, guid: 23a021b5a35164148a9f938e38f913e5, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].x
@@ -1850,7 +1850,7 @@ PrefabInstance:
     - target: {fileID: 3230741226017253057, guid: 7a1f7e0bd995df249ba65b60c928a092, type: 3}
       propertyPath: stepText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1758712679}
     - target: {fileID: 3230741226017253057, guid: 7a1f7e0bd995df249ba65b60c928a092, type: 3}
       propertyPath: bow_sound
       value: 
